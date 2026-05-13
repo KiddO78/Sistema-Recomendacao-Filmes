@@ -18,225 +18,250 @@
             Criar Conta
           </h2>
 
-          <form (ngSubmit)="register()">
+            <form (ngSubmit)="register()">
 
-            <!-- NOME -->
+                <!-- NOME -->
 
-            <label class="form-label text-white">
-              Nome
-            </label>
+                <label class="form-label text-white">
+                Nome
+                </label>
 
-            <div class="input-group mb-2">
+                <div class="input-group mb-2">
 
-              <span class="input-group-text bg-dark border-dark text-white">
-                <i class="bi bi-person"></i>
-              </span>
+                <span class="input-group-text bg-dark border-dark text-white">
+                    <i class="bi bi-person"></i>
+                </span>
 
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Digite seu nome completo"
-                [(ngModel)]="nome"
-                name="nome">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Digite seu nome completo"
+                    [(ngModel)]="nome"
+                    name="nome">
 
-            </div>
+                </div>
 
-            <small class="text-light mb-4 d-block">
-              Ex: João da Silva
-            </small>
+                <small class="text-light mb-4 d-block">
+                Ex: João da Silva
+                </small>
 
-            <!-- EMAIL -->
+                <!-- EMAIL -->
 
-            <label class="form-label text-white">
-              Email
-            </label>
+                <label class="form-label text-white">
+                Email
+                </label>
 
-            <div class="input-group mb-2">
+                <div class="input-group mb-2">
 
-              <span class="input-group-text bg-dark border-dark text-white">
-                <i class="bi bi-envelope"></i>
-              </span>
+                <span class="input-group-text bg-dark border-dark text-white">
+                    <i class="bi bi-envelope"></i>
+                </span>
 
-              <input
-                type="email"
-                class="form-control"
-                placeholder="Digite seu email"
-                [(ngModel)]="email"
-                name="email">
+                <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Digite seu email"
+                    [(ngModel)]="email"
+                    name="email">
 
-            </div>
+                </div>
 
-            <small class="text-light mb-4 d-block">
-              Ex: joao@email.com
-            </small>
+                <small class="text-light mb-4 d-block">
+                Ex: joao@email.com
+                </small>
 
-            <!-- SENHA -->
+                <!-- SENHA -->
 
-            <label class="form-label text-white">
-              Senha
-            </label>
+                <label class="form-label text-white">
+                Senha
+                </label>
 
-            <div class="input-group mb-2">
+                <div class="input-group mb-2">
 
-              <span class="input-group-text bg-dark border-dark text-white">
-                <i class="bi bi-lock"></i>
-              </span>
+                <span class="input-group-text bg-dark border-dark text-white">
+                    <i class="bi bi-lock"></i>
+                </span>
 
-              <input
-                [type]="mostrarSenha ? 'text' : 'password'"
-                class="form-control"
-                placeholder="Senha forte"
-                [(ngModel)]="senha"
-                name="senha"
-                (input)="verificarForcaSenha()"
-                (copy)="$event.preventDefault()"
-                (paste)="$event.preventDefault()">
+                <input
+                    [type]="mostrarSenha ? 'text' : 'password'"
+                    class="form-control"
+                    placeholder="Senha forte"
+                    [(ngModel)]="senha"
+                    name="senha"
+                    (input)="verificarForcaSenha()"
+                    (copy)="$event.preventDefault()"
+                    (paste)="$event.preventDefault()">
 
-              <button
-                type="button"
-                class="input-group-text bg-dark border-dark text-white"
-                (click)="toggleSenha()">
+                <button
+                    type="button"
+                    class="input-group-text bg-dark border-dark text-white"
+                    (click)="toggleSenha()">
 
-                <i
-                  class="bi"
-                  [class.bi-eye]="!mostrarSenha"
-                  [class.bi-eye-slash]="mostrarSenha">
+                    <i
+                    class="bi"
+                    [class.bi-eye]="!mostrarSenha"
+                    [class.bi-eye-slash]="mostrarSenha">
 
-                </i>
+                    </i>
 
-              </button>
+                </button>
 
-            </div>
+                </div>
 
-            <small class="text-light d-block mb-3">
-              Use pelo menos 8 caracteres.
-            </small>
+                <small class="text-light d-block mb-3">
+                Use pelo menos 8 caracteres.
+                </small>
 
-            <!-- FORÇA -->
+                <!-- FORÇA -->
 
-            <h5 class="text-white">
+                <h5 class="text-white">
 
-              Força da senha:
+                Força da senha:
 
-              <span
-                [class.text-danger]="forcaSenha === 'Fraca'"
-                [class.text-warning]="forcaSenha === 'Média'"
-                [class.text-success]="forcaSenha === 'Forte'">
+                <span
+                    [class.text-danger]="forcaSenha === 'Fraca'"
+                    [class.text-warning]="forcaSenha === 'Média'"
+                    [class.text-success]="forcaSenha === 'Forte'">
 
-                {{ forcaSenha }}
+                    {{ forcaSenha }}
 
-              </span>
+                </span>
 
-            </h5>
+                </h5>
 
-            <!-- CRITÉRIOS -->
+                <!-- CRITÉRIOS -->
 
-            <div class="criterios mb-4 text-light">
+                <div class="criterios mb-4 text-light">
 
-              <div>✔ Mínimo 8 caracteres</div>
+                <div>✔ Mínimo 8 caracteres</div>
 
-              <div>✔ Pelo menos uma letra maiúscula</div>
+                <div>✔ Pelo menos uma letra maiúscula</div>
 
-              <div>✔ Pelo menos uma letra minúscula</div>
+                <div>✔ Pelo menos uma letra minúscula</div>
 
-              <div>✔ Pelo menos um número</div>
+                <div>✔ Pelo menos um número</div>
 
-              <div>✔ Pelo menos um caractere especial</div>
+                <div>✔ Pelo menos um caractere especial</div>
 
-            </div>
+                </div>
 
-            <!-- CONFIRMAR -->
+                <!-- CONFIRMAR -->
 
-            <label class="form-label text-white">
-              Confirmar senha
-            </label>
+                <label class="form-label text-white">
+                Confirmar senha
+                </label>
 
-            <div class="input-group mb-2">
+                <div class="input-group mb-2">
 
-              <span class="input-group-text bg-dark border-dark text-white">
-                <i class="bi bi-lock"></i>
-              </span>
+                <span class="input-group-text bg-dark border-dark text-white">
+                    <i class="bi bi-lock"></i>
+                </span>
 
-              <input
-                [type]="mostrarConfirmarSenha ? 'text' : 'password'"
-                class="form-control"
-                placeholder="Confirmar senha"
-                [(ngModel)]="confirmarSenha"
-                name="confirmarSenha"
-                (copy)="$event.preventDefault()"
-                (paste)="$event.preventDefault()">
+                <input
+                    [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+                    class="form-control"
+                    placeholder="Confirmar senha"
+                    [(ngModel)]="confirmarSenha"
+                    name="confirmarSenha"
+                    (copy)="$event.preventDefault()"
+                    (paste)="$event.preventDefault()">
 
-              <button
-                type="button"
-                class="input-group-text bg-dark border-dark text-white"
-                (click)="toggleConfirmarSenha()">
+                <button
+                    type="button"
+                    class="input-group-text bg-dark border-dark text-white"
+                    (click)="toggleConfirmarSenha()">
 
-                <i
-                  class="bi"
-                  [class.bi-eye]="!mostrarConfirmarSenha"
-                  [class.bi-eye-slash]="mostrarConfirmarSenha">
+                    <i
+                    class="bi"
+                    [class.bi-eye]="!mostrarConfirmarSenha"
+                    [class.bi-eye-slash]="mostrarConfirmarSenha">
 
-                </i>
+                    </i>
 
-              </button>
+                </button>
 
-            </div>
+                </div>
 
-            <small class="text-light d-block mb-4">
-              As senhas devem coincidir.
-            </small>
+                <small class="text-light d-block mb-4">
+                As senhas devem coincidir.
+                </small>
 
-            <!-- ALERTAS -->
+                <!-- ALERTAS -->
 
-            <div
-              *ngIf="mensagem"
-              class="alert alert-success">
+                <div
+                *ngIf="mensagem"
+                class="alert alert-success">
 
-              {{ mensagem }}
+                {{ mensagem }}
 
-            </div>
+                </div>
 
-            <div
-              *ngIf="erro"
-              class="alert alert-danger">
+                <div
+                *ngIf="erro"
+                class="alert alert-danger">
 
-              {{ erro }}
+                {{ erro }}
 
-            </div>
+                </div>
 
-            <!-- SEGURANÇA -->
+                <!-- SEGURANÇA -->
 
-            <div class="security-box mb-4">
+                <div class="security-box mb-4">
 
-              <h5 class="text-warning">
-                <i class="bi bi-shield-lock"></i>
-                Segurança
-              </h5>
+                <h5 class="text-warning">
+                    <i class="bi bi-shield-lock"></i>
+                    Segurança
+                </h5>
 
-              <p class="text-light mb-0">
+                <p class="text-light mb-0">
 
-                Não é permitido copiar,
-                colar ou usar atalhos
-                nos campos de senha.
+                    Não é permitido copiar,
+                    colar ou usar atalhos
+                    nos campos de senha.
 
-              </p>
+                </p>
 
-            </div>
+                </div>
 
-            <!-- BOTÃO -->
+                <!-- BOTÃO -->
 
-            <button
-              class="btn btn-warning w-100 btn-lg">
+                <button
+                class="btn btn-warning w-100 btn-lg">
 
-              Registrar
+                Registrar
 
-            </button>
+                </button>
+
+                <!-- LOGIN -->
+
+                <p class="login-link">
+
+                    Já possui uma conta?
+
+                    <a routerLink="/sign-in">
+
+                        Iniciar sessão
+
+                    </a>
+
+                </p>
+
+                <!-- SEGURANÇA -->
+
+                <div class="security">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                    Seus dados estão protegidos conosco.
+
+                </div>
 
           </form>
 
         </div>
 
       </div>
+      
 
       <!-- LADO DIREITO -->
 

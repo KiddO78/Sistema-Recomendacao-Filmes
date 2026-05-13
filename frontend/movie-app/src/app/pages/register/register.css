@@ -102,3 +102,30 @@
   }
 
 }
+
+.login-link {
+
+  text-align: center;
+
+  color: white;
+
+  margin-top: 30px;
+}
+
+.login-link a {
+
+  color: #f5c518;
+
+  text-decoration: none;
+
+  font-weight: bold;
+}
+
+.security {
+
+  margin-top: 30px;
+
+  text-align: center;
+
+  color: #777;
+}

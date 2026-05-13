@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { NgIf } from '@angular/common';
 
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -12,7 +15,8 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-sign-in',
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './sign-in.html',
   styleUrl: './sign-in.css'
@@ -25,10 +29,21 @@ export class SignIn {
 
   erro = '';
 
+  mostrarSenha = false;
+
+  lembrarMe = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
+
+  toggleSenha() {
+
+    this.mostrarSenha =
+      !this.mostrarSenha;
+
+  }
 
   login() {
 

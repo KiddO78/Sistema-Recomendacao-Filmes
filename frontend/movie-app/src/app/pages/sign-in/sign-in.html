@@ -1,53 +1,164 @@
-<div class="auth-container">
+<div class="signin-page">
 
-  <div class="auth-card">
+  <div class="signin-card">
 
-    <h1 class="text-warning mb-4 text-center">
+    <!-- LOGO -->
+
+    <h1 class="logo">
       MovieDB
     </h1>
 
-    <h3 class="text-white text-center mb-4">
-      Entrar
-    </h3>
+    <!-- TITULO -->
+
+    <h2 class="titulo">
+      Iniciar sessão
+    </h2>
+
+    <!-- FORM -->
 
     <form (ngSubmit)="login()">
 
-      <div class="mb-3">
+      <!-- EMAIL -->
+
+      <label class="label">
+        Email
+      </label>
+
+      <div class="input-box">
+
+        <i class="bi bi-envelope"></i>
 
         <input
           type="email"
-          class="form-control"
-          placeholder="Email"
+          placeholder="Digite seu email"
           [(ngModel)]="email"
           name="email">
 
       </div>
 
-      <div class="mb-3">
+      <!-- SENHA -->
+
+      <label class="label">
+        Senha
+      </label>
+
+      <div class="input-box">
+
+        <i class="bi bi-lock"></i>
 
         <input
-          type="password"
-          class="form-control"
-          placeholder="Senha"
+          [type]="mostrarSenha ? 'text' : 'password'"
+          placeholder="Digite sua senha"
           [(ngModel)]="senha"
           name="senha">
 
+        <button
+          type="button"
+          class="eye-btn"
+          (click)="toggleSenha()">
+
+          <i
+            class="bi"
+            [class.bi-eye]="!mostrarSenha"
+            [class.bi-eye-slash]="mostrarSenha">
+
+          </i>
+
+        </button>
+
       </div>
 
-      <button
-        class="btn btn-warning w-100">
+      <!-- OPCOES -->
 
-        Entrar
+      <div class="opcoes">
+
+        <label class="remember">
+
+          <input
+            type="checkbox"
+            [(ngModel)]="lembrarMe"
+            name="lembrarMe">
+
+          Lembrar-me
+
+        </label>
+
+        <a href="#">
+          Esqueceu a senha?
+        </a>
+
+      </div>
+
+      <!-- ALERTA -->
+
+      <div
+        *ngIf="erro"
+        class="alert alert-danger">
+
+        {{ erro }}
+
+      </div>
+
+      <!-- BOTAO -->
+
+      <button class="login-btn">
+
+        Iniciar sessão
 
       </button>
 
     </form>
 
-    <div
-      *ngIf="erro"
-      class="alert alert-danger mt-3">
+    <!-- DIVISOR -->
 
-      {{ erro }}
+    <div class="divider">
+
+      <span>ou</span>
+
+    </div>
+
+    <!-- GOOGLE -->
+
+    <button class="social-btn">
+
+      <img
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
+
+      Continuar com Google
+
+    </button>
+
+    <!-- APPLE -->
+
+    <button class="social-btn">
+
+      <i class="bi bi-apple"></i>
+
+      Continuar com Apple
+
+    </button>
+
+    <!-- REGISTER -->
+
+    <p class="register-link">
+
+      Não tem uma conta?
+
+      <a routerLink="/register">
+
+        Criar conta
+
+      </a>
+
+    </p>
+
+    <!-- SEGURANÇA -->
+
+    <div class="security">
+
+      <i class="bi bi-shield-lock"></i>
+
+      Seus dados estão protegidos conosco.
 
     </div>
 
