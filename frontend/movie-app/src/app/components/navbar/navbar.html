@@ -17,34 +17,89 @@
     class="collapse navbar-collapse mt-3 mt-lg-0"
     id="menu">
 
-    <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto">
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="">
-          Home
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="">
+            Home
+            </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/movies">
-          Filmes
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/movies">
+            Filmes
+            </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/favorites">
-          Favoritos
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/favorites">
+            Favoritos
+            </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login">
-          Entrar
-        </a>
-      </li>
+            <!-- NÃO LOGADO -->
 
-    </ul>
+            <li
+                *ngIf="!usuario"
+                class="nav-item">
 
-  </div>
+                <a
+                    class="nav-link"
+                    routerLink="/login">
+
+                    Entrar
+
+                </a>
+
+            </li>
+
+            <!-- LOGADO -->
+
+            <li
+                *ngIf="usuario"
+                class="nav-item dropdown">
+
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    data-bs-toggle="dropdown">
+
+                    {{ usuario.nome }}
+
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-dark">
+
+                    <li>
+
+                        <a
+                            class="dropdown-item"
+                            href="#">
+
+                            Perfil
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <button
+                            class="dropdown-item"
+                            (click)="logout()">
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+        </ul>
+
+    </div>
 
 </nav>
