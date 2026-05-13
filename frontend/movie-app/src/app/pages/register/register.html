@@ -1,64 +1,294 @@
-<div class="auth-container">
+<div class="register-page">
 
-  <div class="auth-card">
+  <div class="container-fluid">
 
-    <h1 class="text-warning mb-4 text-center">
-      MovieDB
-    </h1>
+    <div class="row min-vh-100">
 
-    <h3 class="text-white text-center mb-4">
-      Criar Conta
-    </h3>
+      <!-- FORM -->
 
-    <form (ngSubmit)="register()">
+      <div class="col-lg-7 d-flex align-items-center">
 
-        <div class="mb-3">
+        <div class="register-card">
 
-            <input
-            type="text"
-            class="form-control"
-            placeholder="Nome"
-            [(ngModel)]="nome"
-            name="nome">
+          <h1 class="logo mb-4">
+            MovieDB
+          </h1>
 
-        </div>
+          <h2 class="text-white mb-5">
+            Criar Conta
+          </h2>
 
-        <div class="mb-3">
+          <form (ngSubmit)="register()">
 
-            <input
+            <!-- NOME -->
+
+            <label class="form-label text-white">
+              Nome
+            </label>
+
+            <div class="input-group mb-2">
+
+              <span class="input-group-text bg-dark border-dark text-white">
+                <i class="bi bi-person"></i>
+              </span>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Digite seu nome completo"
+                [(ngModel)]="nome"
+                name="nome">
+
+            </div>
+
+            <small class="text-light mb-4 d-block">
+              Ex: João da Silva
+            </small>
+
+            <!-- EMAIL -->
+
+            <label class="form-label text-white">
+              Email
+            </label>
+
+            <div class="input-group mb-2">
+
+              <span class="input-group-text bg-dark border-dark text-white">
+                <i class="bi bi-envelope"></i>
+              </span>
+
+              <input
                 type="email"
                 class="form-control"
-                placeholder="Email"
+                placeholder="Digite seu email"
                 [(ngModel)]="email"
                 name="email">
 
-        </div>
+            </div>
 
-        <div class="mb-3">
+            <small class="text-light mb-4 d-block">
+              Ex: joao@email.com
+            </small>
 
-            <input
-                type="password"
+            <!-- SENHA -->
+
+            <label class="form-label text-white">
+              Senha
+            </label>
+
+            <div class="input-group mb-2">
+
+              <span class="input-group-text bg-dark border-dark text-white">
+                <i class="bi bi-lock"></i>
+              </span>
+
+              <input
+                [type]="mostrarSenha ? 'text' : 'password'"
                 class="form-control"
-                placeholder="Senha"
+                placeholder="Senha forte"
                 [(ngModel)]="senha"
-                name="senha">
+                name="senha"
+                (input)="verificarForcaSenha()"
+                (copy)="$event.preventDefault()"
+                (paste)="$event.preventDefault()">
+
+              <button
+                type="button"
+                class="input-group-text bg-dark border-dark text-white"
+                (click)="toggleSenha()">
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!mostrarSenha"
+                  [class.bi-eye-slash]="mostrarSenha">
+
+                </i>
+
+              </button>
+
+            </div>
+
+            <small class="text-light d-block mb-3">
+              Use pelo menos 8 caracteres.
+            </small>
+
+            <!-- FORÇA -->
+
+            <h5 class="text-white">
+
+              Força da senha:
+
+              <span
+                [class.text-danger]="forcaSenha === 'Fraca'"
+                [class.text-warning]="forcaSenha === 'Média'"
+                [class.text-success]="forcaSenha === 'Forte'">
+
+                {{ forcaSenha }}
+
+              </span>
+
+            </h5>
+
+            <!-- CRITÉRIOS -->
+
+            <div class="criterios mb-4 text-light">
+
+              <div>✔ Mínimo 8 caracteres</div>
+
+              <div>✔ Pelo menos uma letra maiúscula</div>
+
+              <div>✔ Pelo menos uma letra minúscula</div>
+
+              <div>✔ Pelo menos um número</div>
+
+              <div>✔ Pelo menos um caractere especial</div>
+
+            </div>
+
+            <!-- CONFIRMAR -->
+
+            <label class="form-label text-white">
+              Confirmar senha
+            </label>
+
+            <div class="input-group mb-2">
+
+              <span class="input-group-text bg-dark border-dark text-white">
+                <i class="bi bi-lock"></i>
+              </span>
+
+              <input
+                [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+                class="form-control"
+                placeholder="Confirmar senha"
+                [(ngModel)]="confirmarSenha"
+                name="confirmarSenha"
+                (copy)="$event.preventDefault()"
+                (paste)="$event.preventDefault()">
+
+              <button
+                type="button"
+                class="input-group-text bg-dark border-dark text-white"
+                (click)="toggleConfirmarSenha()">
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!mostrarConfirmarSenha"
+                  [class.bi-eye-slash]="mostrarConfirmarSenha">
+
+                </i>
+
+              </button>
+
+            </div>
+
+            <small class="text-light d-block mb-4">
+              As senhas devem coincidir.
+            </small>
+
+            <!-- ALERTAS -->
+
+            <div
+              *ngIf="mensagem"
+              class="alert alert-success">
+
+              {{ mensagem }}
+
+            </div>
+
+            <div
+              *ngIf="erro"
+              class="alert alert-danger">
+
+              {{ erro }}
+
+            </div>
+
+            <!-- SEGURANÇA -->
+
+            <div class="security-box mb-4">
+
+              <h5 class="text-warning">
+                <i class="bi bi-shield-lock"></i>
+                Segurança
+              </h5>
+
+              <p class="text-light mb-0">
+
+                Não é permitido copiar,
+                colar ou usar atalhos
+                nos campos de senha.
+
+              </p>
+
+            </div>
+
+            <!-- BOTÃO -->
+
+            <button
+              class="btn btn-warning w-100 btn-lg">
+
+              Registrar
+
+            </button>
+
+          </form>
 
         </div>
 
-        <button
-            class="btn btn-warning w-100">
+      </div>
 
-            Registrar
+      <!-- LADO DIREITO -->
 
-        </button>
+      <div class="col-lg-5 d-none d-lg-flex align-items-center">
 
-    </form>
+        <div class="info-card">
 
-    <div
-        *ngIf="mensagem"
-        class="alert alert-success mt-3">
+          <h2 class="text-white mb-5">
 
-        {{ mensagem }}
+            Critérios de força da senha
+
+          </h2>
+
+          <div class="mb-5">
+
+            <h3 class="text-danger">
+              Fraca
+            </h3>
+
+            <p class="text-light">
+              Não atende aos critérios mínimos.
+            </p>
+
+          </div>
+
+          <div class="mb-5">
+
+            <h3 class="text-warning">
+              Média
+            </h3>
+
+            <p class="text-light">
+              Parcialmente segura.
+            </p>
+
+          </div>
+
+          <div>
+
+            <h3 class="text-success">
+              Forte
+            </h3>
+
+            <p class="text-light">
+              Atende todos os critérios.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
