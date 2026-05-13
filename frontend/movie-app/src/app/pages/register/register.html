@@ -10,42 +10,57 @@
       Criar Conta
     </h3>
 
-    <form>
+    <form (ngSubmit)="register()">
 
-      <div class="mb-3">
+        <div class="mb-3">
 
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Nome">
+            <input
+            type="text"
+            class="form-control"
+            placeholder="Nome"
+            [(ngModel)]="nome"
+            name="nome">
 
-      </div>
+        </div>
 
-      <div class="mb-3">
+        <div class="mb-3">
 
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Email">
+            <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                [(ngModel)]="email"
+                name="email">
 
-      </div>
+        </div>
 
-      <div class="mb-3">
+        <div class="mb-3">
 
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Senha">
+            <input
+                type="password"
+                class="form-control"
+                placeholder="Senha"
+                [(ngModel)]="senha"
+                name="senha">
 
-      </div>
+        </div>
 
-      <button class="btn btn-warning w-100">
+        <button
+            class="btn btn-warning w-100">
 
-        Registrar
+            Registrar
 
-      </button>
+        </button>
 
     </form>
+
+    <div
+        *ngIf="mensagem"
+        class="alert alert-success mt-3">
+
+        {{ mensagem }}
+
+    </div>
 
   </div>
 

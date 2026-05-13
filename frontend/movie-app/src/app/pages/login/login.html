@@ -1,43 +1,102 @@
-<p>login works!</p>
-<div class="auth-container">
+<div class="login-page">
 
-  <div class="auth-card">
+  <div class="container py-5">
 
-    <h1 class="text-warning mb-4 text-center">
-      MovieDB
-    </h1>
+    <div class="row">
 
-    <h3 class="text-white text-center mb-4">
-      Login
-    </h3>
+      <!-- esquerda -->
 
-    <form>
+      <div class="col-lg-6 mb-5">
 
-      <div class="mb-3">
+        <h1 class="text-warning mb-4">
+          Entrar
+        </h1>
 
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Email">
+        <button
+          routerLink="/register"
+          class="btn btn-warning w-100 py-3 fw-bold mb-4">
+
+          Criar Conta
+
+        </button>
+
+        <div class="text-center text-secondary mb-4">
+
+          ou
+
+        </div>
+
+        <button
+          routerLink="/register"
+          class="btn btn-light w-100 py-3 fw-bold">
+
+          Iniciar sessão em uma conta existente
+
+        </button>
 
       </div>
 
-      <div class="mb-3">
+      <!-- direita -->
 
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Senha">
+      <div class="col-lg-6 text-white">
+
+        <h1 class="fw-bold mb-4">
+
+          A experiência é muito melhor quando inicia sessão!
+
+        </h1>
+
+        <div class="mb-4">
+
+          <h3>
+            Recomendações personalizadas
+          </h3>
+
+          <p class="text-secondary">
+            Filmes adaptados ao seu gosto.
+          </p>
+
+        </div>
+
+        <div class="mb-4">
+
+          <h3>
+            Sua Watchlist
+          </h3>
+
+          <p class="text-secondary">
+            Salve filmes para assistir depois.
+          </p>
+
+        </div>
+
+        <div class="mb-4">
+
+          <h3>
+            Avaliações
+          </h3>
+
+          <p class="text-secondary">
+            Avalie e organize seus filmes favoritos.
+          </p>
+
+        </div>
+
+        <div class="mb-4">
+
+          <h3>
+            Favoritos
+          </h3>
+
+          <p class="text-secondary">
+            Crie sua coleção pessoal de filmes.
+          </p>
+
+        </div>
 
       </div>
 
-      <button class="btn btn-warning w-100">
-
-        Entrar
-
-      </button>
-
-    </form>
+    </div>
 
   </div>
 
