@@ -61,7 +61,7 @@ export class SignIn {
 
       next: (res:any) => {
 
-        if(res.success) {
+        if(res.success === true) {
 
           localStorage.setItem(
             'usuario',

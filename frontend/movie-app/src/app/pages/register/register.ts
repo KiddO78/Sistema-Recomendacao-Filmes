@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { 
+  Component,
+  ChangeDetectorRef
+} from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -26,9 +29,12 @@ export class Register {
   mensagem = '';
   erro = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
   register() {
+
+    this.erro = '';
+    this.mensagem = '';
 
     if(this.senha !== this.confirmarSenha) {
 
@@ -50,10 +56,24 @@ export class Register {
 
       next: (res:any) => {
 
-        if(res.success) {
+        console.log(res);
+
+        this.erro = '';
+        this.mensagem = '';
+
+        if(res.success === true) {
 
           this.mensagem =
             'Conta criada com sucesso!';
+
+          this.cdr.detectChanges();
+
+        } else {
+
+          this.erro =
+            res.mensagem;
+
+          this.cdr.detectChanges();
 
         }
 
@@ -61,7 +81,7 @@ export class Register {
 
       error: () => {
 
-        this.mensagem =
+        this.erro =
           'Erro ao registrar utilizador';
 
       }

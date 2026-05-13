@@ -18,7 +18,9 @@
             Criar Conta
           </h2>
 
-            <form (ngSubmit)="register()">
+            <form 
+                (ngSubmit)="register()"
+                #form="ngForm">
 
                 <!-- NOME -->
 
@@ -186,24 +188,6 @@
                 As senhas devem coincidir.
                 </small>
 
-                <!-- ALERTAS -->
-
-                <div
-                *ngIf="mensagem"
-                class="alert alert-success">
-
-                {{ mensagem }}
-
-                </div>
-
-                <div
-                *ngIf="erro"
-                class="alert alert-danger">
-
-                {{ erro }}
-
-                </div>
-
                 <!-- SEGURANÇA -->
 
                 <div class="security-box mb-4">
@@ -223,12 +207,31 @@
 
                 </div>
 
+                <!-- ALERTAS -->
+
+                <div
+                *ngIf="mensagem !== ''"
+                class="alert alert-success mt-3">
+
+                {{ mensagem }}
+
+                </div>
+
+                <div
+                    *ngIf="erro !== ''"
+                    class="alert alert-danger mt-3">
+
+                    {{ erro }}
+
+                </div>
+
                 <!-- BOTÃO -->
 
                 <button
-                class="btn btn-warning w-100 btn-lg">
+                    type="submit"
+                    class="btn btn-warning w-100 btn-lg">
 
-                Registrar
+                    Criar Conta
 
                 </button>
 

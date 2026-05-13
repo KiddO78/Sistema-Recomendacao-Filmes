@@ -14,6 +14,26 @@ $senha = password_hash($data["senha"], PASSWORD_DEFAULT);
 
 try {
 
+    $check = "SELECT id FROM usuarios
+          WHERE email = :email";
+
+    $stmt = $pdo->prepare($check);
+
+    $stmt->bindParam(":email", $email);
+
+    $stmt->execute();
+
+    if($stmt->rowCount() > 0) {
+
+        echo json_encode([
+            "success" => false,
+            "mensagem" => "Este email já está cadastrado"
+        ]);
+
+        exit;
+
+    }
+
     $sql = "INSERT INTO usuarios(
         nome,
         email,
