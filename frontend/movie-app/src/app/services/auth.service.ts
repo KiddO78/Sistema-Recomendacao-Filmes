@@ -12,12 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(dados:any) {
-
-    return this.http.post(
-      `${this.api}/register.php`,
-      dados
-    );
-
+    return this.http.post(`${this.api}/register.php`, dados);
   }
+
+  login(dados:any) {
+    return this.http.post(`${this.api}/login.php`, dados);
+}
 
 }

@@ -10,14 +10,16 @@
       Entrar
     </h3>
 
-    <form>
+    <form (ngSubmit)="login()">
 
       <div class="mb-3">
 
         <input
           type="email"
           class="form-control"
-          placeholder="Email">
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email">
 
       </div>
 
@@ -26,7 +28,9 @@
         <input
           type="password"
           class="form-control"
-          placeholder="Senha">
+          placeholder="Senha"
+          [(ngModel)]="senha"
+          name="senha">
 
       </div>
 
@@ -38,6 +42,14 @@
       </button>
 
     </form>
+
+    <div
+      *ngIf="erro"
+      class="alert alert-danger mt-3">
+
+      {{ erro }}
+
+    </div>
 
   </div>
 

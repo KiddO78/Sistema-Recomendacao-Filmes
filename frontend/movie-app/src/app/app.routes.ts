@@ -22,7 +22,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'signin',
+    path: 'sign-in',
     component: SignIn
   },
 
