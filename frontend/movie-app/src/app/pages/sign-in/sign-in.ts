@@ -10,6 +10,7 @@ import {
 } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -35,6 +36,7 @@ export class SignIn {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -62,6 +64,11 @@ export class SignIn {
       next: (res:any) => {
 
         if(res.success === true) {
+          
+          this.userService
+            .salvarUsuario(res.usuario);
+
+          this.router.navigate(['/']);
 
           localStorage.setItem(
             'usuario',

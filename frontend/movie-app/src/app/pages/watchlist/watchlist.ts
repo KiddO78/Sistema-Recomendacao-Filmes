@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
+import {
+  NgFor,
+  NgIf
+} from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -8,10 +11,13 @@ import { WatchlistService } from '../../services/watchlist.service';
 
 import { Movie } from '../../models/movie';
 
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-watchlist',
   imports: [
     NgFor,
+    NgIf,
     RouterLink
   ],
   templateUrl: './watchlist.html',
@@ -21,12 +27,26 @@ export class Watchlist {
 
   filmes: Movie[] = [];
 
+  usuarioLogado = false;
+
   constructor(
-    private watchlistService: WatchlistService
+
+    private watchlistService: WatchlistService,
+
+    private userService: UserService
+
   ) {
 
-    this.filmes =
-      this.watchlistService.getWatchlist();
+    this.usuarioLogado =
+      this.userService.isLoggedIn();
+
+    if(this.usuarioLogado) {
+
+      this.filmes =
+        this.watchlistService
+          .getWatchlist();
+
+    }
 
   }
 

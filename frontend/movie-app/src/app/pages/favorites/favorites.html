@@ -8,7 +8,36 @@
 
     </h1>
 
-    <div class="row">
+    <!-- NÃO LOGADO -->
+
+    <div
+      *ngIf="!usuarioLogado"
+      class="empty-message">
+
+      Inicie sessão para ver
+      seus filmes favoritos.
+
+    </div>
+
+    <!-- LOGADO MAS SEM FAVORITOS -->
+
+    <div
+      *ngIf="
+        usuarioLogado &&
+        favoritos.length === 0
+      "
+      class="empty-message">
+
+      Você ainda não possui
+      filmes favoritos.
+
+    </div>
+
+    <!-- FAVORITOS -->
+
+    <div
+      *ngIf="favoritos.length > 0"
+      class="row">
 
       <div
         *ngFor="let filme of favoritos"
@@ -16,7 +45,10 @@
 
         <div
           class="movie-card"
-          [routerLink]="['/movie', filme.id]">
+          [routerLink]="[
+            '/movie',
+            filme.id
+          ]">
 
           <img
             [src]="filme.poster">

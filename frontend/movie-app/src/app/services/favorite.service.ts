@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Movie } from '../models/movie';
 
+import { UserService } from './user.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,15 +11,27 @@ export class FavoriteService {
 
   favoritos: Movie[] = [];
 
-  constructor() {
+  constructor(
+    private userService: UserService
+  ) {
 
-    const dados =
-      localStorage.getItem('favoritos');
+    const usuario =
+      this.userService.getUsuario();
 
-    if(dados) {
+    if(usuario) {
 
-      this.favoritos =
-        JSON.parse(dados);
+      const chave =
+        'favoritos_' + usuario.email;
+
+      const dados =
+        localStorage.getItem(chave);
+
+      if(dados) {
+
+        this.favoritos =
+          JSON.parse(dados);
+
+      }
 
     }
 
@@ -52,10 +66,20 @@ export class FavoriteService {
 
     }
 
-    localStorage.setItem(
-      'favoritos',
-      JSON.stringify(this.favoritos)
-    );
+    const usuario =
+      this.userService.getUsuario();
+
+    if(usuario) {
+
+      localStorage.setItem(
+
+        'favoritos_' + usuario.email,
+
+        JSON.stringify(this.favoritos)
+
+      );
+
+    }
 
   }
 

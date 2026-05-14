@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+    usuarioAtual = new BehaviorSubject<any>(this.getUsuario());
 
   getUsuario() {
 
@@ -28,8 +31,22 @@ export class UserService {
 
   logout() {
 
-    localStorage.removeItem('usuario');
+    localStorage.removeItem(
+        'usuario'
+    );
+
+    this.usuarioAtual.next(null);
 
   }
 
+  salvarUsuario(usuario:any) {
+
+    localStorage.setItem(
+        'usuario',
+        JSON.stringify(usuario)
+    );
+
+    this.usuarioAtual.next(usuario);
+
+  }
 }

@@ -8,7 +8,35 @@
 
     </h1>
 
-    <div class="row">
+    <!-- NÃO LOGADO -->
+
+    <div
+      *ngIf="!usuarioLogado"
+      class="empty-message">
+
+      Inicie sessão para acessar
+      sua watchlist.
+
+    </div>
+
+    <!-- SEM FILMES -->
+
+    <div
+      *ngIf="
+        usuarioLogado &&
+        filmes.length === 0
+      "
+      class="empty-message">
+
+      Sua watchlist está vazia.
+
+    </div>
+
+    <!-- FILMES -->
+
+    <div
+      *ngIf="filmes.length > 0"
+      class="row">
 
       <div
         *ngFor="let filme of filmes"
@@ -16,7 +44,10 @@
 
         <div
           class="movie-card"
-          [routerLink]="['/movie', filme.id]">
+          [routerLink]="[
+            '/movie',
+            filme.id
+          ]">
 
           <img
             [src]="filme.poster">

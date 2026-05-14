@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
+import {
+  NgFor,
+  NgIf
+} from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -8,10 +11,13 @@ import { FavoriteService } from '../../services/favorite.service';
 
 import { Movie } from '../../models/movie';
 
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-favorites',
   imports: [
     NgFor,
+    NgIf,
     RouterLink
   ],
   templateUrl: './favorites.html',
@@ -21,12 +27,26 @@ export class Favorites {
 
   favoritos: Movie[] = [];
 
+  usuarioLogado = false;
+
   constructor(
-    private favoriteService: FavoriteService
+
+    private favoriteService: FavoriteService,
+
+    private userService: UserService
+
   ) {
 
-    this.favoritos =
-      this.favoriteService.getFavoritos();
+    this.usuarioLogado =
+      this.userService.isLoggedIn();
+
+    if(this.usuarioLogado) {
+
+      this.favoritos =
+        this.favoriteService
+          .getFavoritos();
+
+    }
 
   }
 

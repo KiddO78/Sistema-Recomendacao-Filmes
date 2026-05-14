@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Movie } from '../models/movie';
 
+import { UserService } from './user.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,17 +11,27 @@ export class WatchlistService {
 
   watchlist: Movie[] = [];
 
-  constructor() {
+  constructor(
+    private userService: UserService
+  ) {
 
-    const dados =
-      localStorage.getItem(
-        'watchlist'
-      );
+    const usuario =
+      this.userService.getUsuario();
 
-    if(dados) {
+    if(usuario) {
 
-      this.watchlist =
-        JSON.parse(dados);
+      const chave =
+        'watchlist_' + usuario.email;
+
+      const dados =
+        localStorage.getItem(chave);
+
+      if(dados) {
+
+        this.watchlist =
+          JSON.parse(dados);
+
+      }
 
     }
 
@@ -56,10 +68,20 @@ export class WatchlistService {
 
     }
 
-    localStorage.setItem(
-      'watchlist',
-      JSON.stringify(this.watchlist)
-    );
+    const usuario =
+      this.userService.getUsuario();
+
+    if(usuario) {
+
+      localStorage.setItem(
+
+        'watchlist_' + usuario.email,
+
+        JSON.stringify(this.watchlist)
+
+      );
+
+    }
 
   }
 

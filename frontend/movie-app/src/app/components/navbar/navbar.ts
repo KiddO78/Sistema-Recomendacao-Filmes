@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { 
+  Component,
+  OnInit
+ } from '@angular/core';
 import {
   RouterLink,
   Router
@@ -28,16 +31,21 @@ export class Navbar {
     private router: Router, 
     private movieService: MovieService
   ) {
-
-    this.usuario = this.userService.getUsuario();
-
+    this.userService.
+      usuarioAtual.
+      subscribe(usuario => {
+        
+      this.usuario = usuario;
+    });
   }
 
   logout() {
 
     this.userService.logout();
 
-    location.reload();
+    this.usuario = null;
+
+    this.router.navigate(['/']);
 
   }
 

@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 import { FavoriteService } from '../../services/favorite.service';
 import { RatingService } from '../../services/rating.service';
 import { WatchlistService } from '../../services/watchlist.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -29,6 +30,8 @@ export class MovieDetails {
   notaUsuario = 0;
   estrelas = [1, 2, 3, 4, 5];
   naWatchlist = false;
+  usuarioLogado = false;
+  mensagem = '';
 
   constructor(
 
@@ -42,25 +45,52 @@ export class MovieDetails {
 
     private ratingService: RatingService,
 
-    private watchlistService: WatchlistService
+    private watchlistService: WatchlistService,
+
+    private userService: UserService
 
   ) {
 
+    this.usuarioLogado =
+      this.userService.isLoggedIn();
+
     const id =
-      Number(this.route.snapshot.paramMap.get('id'));
+      Number(
+        this.route.snapshot
+          .paramMap.get('id')
+      );
 
     this.filme =
-      this.movieService.getMovieById(id);
+      this.movieService
+        .getMovieById(id);
 
-    if(this.filme) {
+    if(
+      this.filme &&
+      this.usuarioLogado
+    ) {
 
       this.favorito =
-        this.favoriteService.isFavorito(this.filme.id);
-      this.notaUsuario =
-        this.ratingService.getNota(this.filme.id);
+        this.favoriteService
+          .isFavorito(
+            this.filme.id
+          );
+
       this.naWatchlist =
-        this.watchlistService.isWatchlist(this.filme.id);
+
+        this.watchlistService
+          .isWatchlist(
+            this.filme.id
+          );
+
+      this.notaUsuario =
+
+        this.ratingService
+          .getNota(
+            this.filme.id
+          );
+
     }
+
   }
 
   voltar() {
@@ -70,6 +100,21 @@ export class MovieDetails {
   }
 
   toggleFavorito() {
+
+    if(!this.usuarioLogado) {
+
+      this.mensagem =
+        'Inicie Sessão para favoritar filmes';
+
+      setTimeout(() => {
+
+        this.mensagem = '';
+
+      }, 3000);
+
+      return;
+
+    }
 
     if(this.filme) {
 
@@ -86,6 +131,21 @@ export class MovieDetails {
   avaliar(
     nota:number
   ) {
+
+    if(!this.usuarioLogado) {
+
+      this.mensagem =
+        'Inicie Sessão para avaliar filmes';
+
+      setTimeout(() => {
+
+        this.mensagem = '';
+
+      }, 3000);
+
+      return;
+
+    }
 
     if(this.notaUsuario === nota) {
 
@@ -110,6 +170,21 @@ export class MovieDetails {
   }
 
   toggleWatchlist() {
+
+    if(!this.usuarioLogado) {
+
+      this.mensagem =
+        'Inicie Sessão para usar a watchlist';
+
+      setTimeout(() => {
+
+        this.mensagem = '';
+
+      }, 3000);
+
+      return;
+
+    }
 
     if(this.filme) {
 
