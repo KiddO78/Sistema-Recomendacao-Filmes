@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-movies',
   imports: [],
   templateUrl: './movies.html',
-  styleUrl: './movies.css',
+  styleUrl: './movies.css'
 })
-export class Movies {}
+export class Movies {
+
+}

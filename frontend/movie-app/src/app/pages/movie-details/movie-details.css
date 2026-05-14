@@ -1,0 +1,163 @@
+.details-page {
+
+  min-height: 100vh;
+
+  background-color: #0b0b0b;
+
+  color: white;
+}
+
+.hero {
+
+  min-height: 100vh;
+
+  background-size: cover;
+
+  background-position: center;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 50px;
+}
+
+.hero-content {
+
+  display: flex;
+
+  gap: 50px;
+
+  align-items: center;
+
+  max-width: 1200px;
+}
+
+.poster {
+
+  width: 320px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.info h1 {
+
+  font-size: 4rem;
+
+  margin-bottom: 20px;
+}
+
+.meta {
+
+  color: #f5c518;
+
+  margin-bottom: 25px;
+
+  font-size: 1.2rem;
+}
+
+.info p {
+
+  font-size: 1.2rem;
+
+  color: #ddd;
+
+  line-height: 1.8;
+
+  margin-bottom: 30px;
+}
+
+.buttons {
+
+  display: flex;
+
+  gap: 20px;
+}
+
+.btn-watch {
+
+  background-color: #f5c518;
+
+  border: none;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+
+  font-size: 1rem;
+}
+
+.btn-favorite {
+
+  background-color: transparent;
+
+  border: 1px solid #fff;
+
+  color: white;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+}
+
+@media(max-width:768px) {
+
+  .hero-content {
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .poster {
+
+    width: 250px;
+  }
+
+  .info h1 {
+
+    font-size: 2.5rem;
+  }
+
+  .buttons {
+
+    justify-content: center;
+  }
+
+}
+
+.back-btn {
+
+  position: fixed;
+
+  top: 100px;
+
+  left: 30px;
+
+  z-index: 1000;
+
+  background-color: rgba(0,0,0,0.7);
+
+  border: 1px solid #f5c518;
+
+  color: #f5c518;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+
+  background-color: #f5c518;
+
+  color: black;
+}

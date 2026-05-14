@@ -49,6 +49,11 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: Dashboard
+  },
+
+  {
+    path: 'movie/:id',
+    component: MovieDetails
   }
 
 ];

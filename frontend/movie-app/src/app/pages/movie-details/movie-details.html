@@ -1,1 +1,71 @@
-<p>movie-details works!</p>
+<div
+  *ngIf="filme"
+  class="details-page">
+
+    <button
+        class="back-btn"
+        (click)="voltar()">
+
+        ← Voltar
+
+    </button>
+
+  <!-- HERO -->
+
+  <section
+    class="hero"
+    [style.background-image]="'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' + filme.banner + ')'">
+
+    <div class="hero-content">
+
+      <img
+        [src]="filme.poster"
+        class="poster">
+
+      <div class="info">
+
+        <h1>
+
+          {{ filme.titulo }}
+
+        </h1>
+
+        <div class="meta">
+
+          ⭐ {{ filme.nota }}
+          •
+          {{ filme.genero }}
+          •
+          {{ filme.ano }}
+
+        </div>
+
+        <p>
+
+          {{ filme.descricao }}
+
+        </p>
+
+        <div class="buttons">
+
+          <button class="btn-watch">
+
+            ▶ Assistir Trailer
+
+          </button>
+
+          <button class="btn-favorite">
+
+            ❤ Favoritar
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

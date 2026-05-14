@@ -1,124 +1,78 @@
-<div class="hero-section d-flex align-items-center">
+<div class="home-page">
 
-  <div class="container text-white">
+  <!-- HERO -->
 
-    <h1 class="display-3 fw-bold">
-      Descubra Filmes Incríveis
-    </h1>
+  <section class="hero">
 
-    <p class="lead mt-3">
-      Explore milhares de filmes, trailers e avaliações.
-    </p>
+    <div class="overlay">
 
-    <a
-      routerLink="/movies"
-      class="btn btn-warning btn-lg mt-3">
+      <div class="hero-content">
 
-      Explorar Filmes
+        <h1>
 
-    </a>
+          Descubra Filmes Incríveis
 
-  </div>
+        </h1>
 
-</div>
+        <p>
 
-<div class="container mt-5">
+          Explore avaliações,
+          favoritos e recomendações.
 
-  <h2 class="text-white mb-4">
-    Filmes Populares
-  </h2>
-
-  <div class="row">
-
-    <div class="col-md-3 mb-4">
-
-      <div class="card movie-card bg-dark text-white">
-
-        <img
-          src="https://picsum.photos/300/450"
-          class="card-img-top">
-
-        <div class="card-body">
-
-          <h5 class="card-title">
-            Filme Exemplo
-          </h5>
-
-          <p class="card-text">
-            ⭐ 8.5/10
-          </p>
-
-        </div>
+        </p>
 
       </div>
 
     </div>
 
-    <div class="col-md-3 mb-4">
+  </section>
 
-      <div class="card movie-card bg-dark text-white">
+  <!-- FILMES -->
 
-        <img
-          src="https://picsum.photos/301/450"
-          class="card-img-top">
+  <div class="container py-5">
 
-        <div class="card-body">
+    <h2 class="section-title">
 
-          <h5 class="card-title">
-            Filme Exemplo
-          </h5>
+      Filmes em destaque
 
-          <p class="card-text">
-            ⭐ 9.1/10
-          </p>
+    </h2>
 
-        </div>
+    <div class="row">
 
-      </div>
+      <div
+        *ngFor="let filme of filmes"
+        class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-    </div>
+        <div class="movie-card"
+          [routerLink]="['/movie', filme.id]">
 
-    <div class="col-md-3 mb-4">
+          <img
+            [src]="filme.poster"
+            [alt]="filme.titulo">
 
-      <div class="card movie-card bg-dark text-white">
+          <div class="movie-info">
 
-        <img
-          src="https://picsum.photos/302/450"
-          class="card-img-top">
+            <h3>
 
-        <div class="card-body">
+              {{ filme.titulo }}
 
-          <h5 class="card-title">
-            Filme Exemplo
-          </h5>
+            </h3>
 
-          <p class="card-text">
-            ⭐ 7.9/10
-          </p>
+            <p>
 
-        </div>
+              {{ filme.genero }}
+              •
+              {{ filme.ano }}
 
-      </div>
+            </p>
 
-    </div>
+            <div class="nota">
 
-    <div class="col-md-3 mb-4">
+              ⭐ {{ filme.nota }}
 
-      <div class="card movie-card bg-dark text-white">
+            </div>
 
-        <img
-          src="https://picsum.photos/303/450"
-          class="card-img-top">
-
-        <div class="card-body">
-
-          <h5 class="card-title">
-            Filme Exemplo
-          </h5>
-
-          <p class="card-text">
-            ⭐ 8.8/10
-          </p>
+          </div>
 
         </div>
 
