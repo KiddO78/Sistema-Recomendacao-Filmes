@@ -8,6 +8,8 @@ import { Movie } from '../../models/movie';
 
 import { RouterLink } from '@angular/router';
 
+import { TmdbService } from '../../services/tmdb.service';
+
 @Component({
   selector: 'app-home',
   imports: [NgFor, RouterLink],
@@ -24,7 +26,8 @@ export class Home {
   banners:any[] = [];
 
   constructor(
-    private movieService: MovieService
+    private movieService: MovieService,
+    private tmdbService: TmdbService
   ) {
 
     this.filmes =
@@ -83,6 +86,23 @@ export class Home {
 
     this.filmeAtual =
       this.banners[index];
+
+  }
+
+  ngOnInit() {
+
+    this.tmdbService
+      .getTrendingMovies()
+
+      .subscribe(
+
+        (res:any) => {
+
+          console.log(res);
+
+        }
+
+      );
 
   }
 }
