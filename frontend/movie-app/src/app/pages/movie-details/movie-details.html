@@ -46,6 +46,31 @@
 
         </p>
 
+        <div class="rating-box">
+
+            <h3>
+
+                Sua avaliação
+
+            </h3>
+
+            <div class="stars">
+
+                <span
+                *ngFor="let estrela of estrelas"
+                (click)="avaliar(estrela)"
+                [class.active]="
+                    estrela <= notaUsuario
+                ">
+
+                ★
+
+                </span>
+
+            </div>
+
+        </div>
+
         <div class="buttons">
 
           <button class="btn-watch">
@@ -54,11 +79,21 @@
 
           </button>
 
-          <button class="btn-favorite">
+          <button
+            class="btn-favorite"
+            (click)="toggleFavorito()">
 
-            ❤ Favoritar
+                <span
+                    [ngClass]="{ 'favoritado': favorito }"
+                    class="heart">
 
-          </button>
+                    ❤
+
+                </span>
+
+                {{ favorito ? 'Favoritado' : 'Favoritar' }}
+
+            </button>
 
         </div>
 

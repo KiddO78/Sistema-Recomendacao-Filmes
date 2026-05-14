@@ -1,11 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
 
-  <a class="navbar-brand fw-bold text-warning"  routerLink="">
+  <!-- LOGO -->
+
+  <a
+    class="navbar-brand fw-bold text-warning"
+    routerLink="">
+
     MovieDB
+
   </a>
+
+  <!-- PESQUISA -->
+
+  <form class="search-box d-flex">
+
+    <input
+      type="text"
+      placeholder="Pesquisar filmes..."
+      [(ngModel)]="pesquisa"
+      name="pesquisa"
+      class="form-control">
+
+    <button
+      type="button"
+      class="btn-search">
+
+      🔍
+
+    </button>
+
+  </form>
+
+  <!-- BOTAO MOBILE -->
 
   <button
     class="navbar-toggler"
+    type="button"
     data-bs-toggle="collapse"
     data-bs-target="#menu">
 
@@ -13,93 +43,113 @@
 
   </button>
 
+  <!-- MENU -->
+
   <div
     class="collapse navbar-collapse mt-3 mt-lg-0"
     id="menu">
 
-        <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto">
 
-        <li class="nav-item">
-            <a class="nav-link" routerLink="">
-            Home
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          routerLink="">
+
+          Home
+
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          routerLink="/movies">
+
+          Filmes
+
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          routerLink="/favorites">
+
+          Favoritos
+
+        </a>
+
+      </li>
+
+      <!-- NÃO LOGADO -->
+
+      <li
+        *ngIf="!usuario"
+        class="nav-item">
+
+        <a
+          class="nav-link"
+          routerLink="/login">
+
+          Entrar
+
+        </a>
+
+      </li>
+
+      <!-- LOGADO -->
+
+      <li
+        *ngIf="usuario"
+        class="nav-item dropdown">
+
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          data-bs-toggle="dropdown">
+
+          👤 {{ usuario.nome }}
+
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-dark">
+
+          <li>
+
+            <a
+              class="dropdown-item"
+              href="#">
+
+              Perfil
+
             </a>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/movies">
-            Filmes
-            </a>
-        </li>
+          </li>
 
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/favorites">
-            Favoritos
-            </a>
-        </li>
+          <li>
 
-            <!-- NÃO LOGADO -->
+            <button
+              class="dropdown-item"
+              (click)="logout()">
 
-            <li
-                *ngIf="!usuario"
-                class="nav-item">
+              🚪 Logout
 
-                <a
-                    class="nav-link"
-                    routerLink="/login">
+            </button>
 
-                    Entrar
-
-                </a>
-
-            </li>
-
-            <!-- LOGADO -->
-
-            <li
-                *ngIf="usuario"
-                class="nav-item dropdown">
-
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    data-bs-toggle="dropdown">
-
-                    {{ usuario.nome }}
-
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-dark">
-
-                    <li>
-
-                        <a
-                            class="dropdown-item"
-                            href="#">
-
-                            Perfil
-
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <button
-                            class="dropdown-item"
-                            (click)="logout()">
-
-                            Logout
-
-                        </button>
-
-                    </li>
-
-                </ul>
-
-            </li>
+          </li>
 
         </ul>
 
-    </div>
+      </li>
+
+    </ul>
+
+  </div>
 
 </nav>

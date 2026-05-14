@@ -94,4 +94,17 @@ export class MovieService {
 
     }
 
+    searchMovies(termo:string) {
+
+        return this.filmes.filter(filme =>
+
+            filme.titulo
+            .toLowerCase()
+            .includes(
+                termo.toLowerCase()
+            )
+
+        );
+
+    }
 }
