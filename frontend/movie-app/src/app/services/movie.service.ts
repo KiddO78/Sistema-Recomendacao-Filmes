@@ -33,7 +33,59 @@ export class MovieService {
         trailer: 'https://www.youtube.com/embed/zSWdZVtXT7E',
 
         thumbnail:
-            'https://img.youtube.com/vi/zSWdZVtXT7E/maxresdefault.jpg'
+            'https://img.youtube.com/vi/zSWdZVtXT7E/maxresdefault.jpg',
+
+        atores: [
+
+            {
+
+                id: 1,
+
+                nome: 'Matthew McConaughey',
+
+                personagem: 'Cooper',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/nA9qhLw74Q8Ifs4K43gmX18sHHo.jpg',
+
+                bio:
+                'Ator americano vencedor do Oscar.'
+
+            },
+
+            {
+
+                id: 2,
+
+                nome: 'Anne Hathaway',
+
+                personagem: 'Brand',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/tLelKoPNiyJCSEtQTz1FGv4TLGc.jpg',
+
+                bio:
+                'Atriz americana conhecida por Interestelar.'
+
+            },
+
+            {
+
+                id: 3,
+
+                nome: 'Jessica Chastain',
+
+                personagem: 'Murph',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/od9DbtPomeroyzM9v2hW9fZLH1.jpg',
+
+                bio:
+                'Atriz americana indicada ao Oscar.'
+
+            }
+
+        ],
     },
 
     {
@@ -60,7 +112,43 @@ export class MovieService {
         trailer: 'https://www.youtube.com/embed/mqqft2x_Aa4',
 
         thumbnail:
-            'https://img.youtube.com/vi/mqqft2x_Aa4/maxresdefault.jpg'
+            'https://img.youtube.com/vi/mqqft2x_Aa4/maxresdefault.jpg',
+
+        atores: [
+
+            {
+
+                id: 6,
+
+                nome: 'Robert Pattinson',
+
+                personagem: 'Bruce Wayne',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/3s9fB40nDuQKAnQvVF2m7XZFTY.jpg',
+
+                bio:
+                'Ator britânico conhecido por Batman.'
+
+            },
+
+            {
+
+                id: 7,
+
+                nome: 'Zoë Kravitz',
+
+                personagem: 'Catwoman',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/jmA8P7j4M3kqf6Jw6iV06P88GJE.jpg',
+
+                bio:
+                'Atriz e cantora americana.'
+
+            }
+
+        ],    
     },
 
     {
@@ -87,7 +175,43 @@ export class MovieService {
         trailer: 'https://www.youtube.com/embed/zAGVQLHvwOY',
 
         thumbnail:
-            'https://img.youtube.com/vi/zAGVQLHvwOY/maxresdefault.jpg'
+            'https://img.youtube.com/vi/zAGVQLHvwOY/maxresdefault.jpg',
+
+        atores: [
+
+            {
+
+                id: 4,
+
+                nome: 'Joaquin Phoenix',
+
+                personagem: 'Arthur Fleck',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/ojXrPW8Uo9zjR4Kj8nQn5hN5Q.jpg',
+
+                bio:
+                'Ator vencedor do Oscar por Joker.'
+
+            },
+
+            {
+
+                id: 5,
+
+                nome: 'Robert De Niro',
+
+                personagem: 'Murray Franklin',
+
+                foto:
+                'https://image.tmdb.org/t/p/w500/cT8htcckIuyI1Lqwt1CvD02ynTh.jpg',
+
+                bio:
+                'Lendário ator americano.'
+
+            }
+
+        ],
 
     }
 

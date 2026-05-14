@@ -6,7 +6,8 @@ import {
  } from '@angular/common';
 
 import {
-  ActivatedRoute
+  ActivatedRoute,
+  RouterLink
 } from '@angular/router';
 
 import { MovieService } from '../../services/movie.service';
@@ -22,7 +23,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [NgIf, NgClass, NgFor, FormsModule],
+  imports: [NgIf, NgClass, NgFor, FormsModule, RouterLink],
   templateUrl: './movie-details.html',
   styleUrl: './movie-details.css'
 })
@@ -42,6 +43,8 @@ export class MovieDetails {
   limiteCaracteres = 500;
   mostrarTrailer = false;
   trailerSeguro?: SafeResourceUrl;
+  abaAtual = 'detalhes';
+  recomendados:any[] = [];
 
   constructor(
 
@@ -77,6 +80,19 @@ export class MovieDetails {
     this.filme =
       this.movieService
         .getMovieById(id);
+
+    this.recomendados =
+
+      this.movieService
+        .getMovies()
+        .filter(
+
+          filme =>
+
+            filme.id !== id
+
+        )
+        .slice(0,6);
 
     if(this.filme) {
 
@@ -499,6 +515,14 @@ export class MovieDetails {
   fecharTrailer() {
 
     this.mostrarTrailer = false;
+
+  }
+
+  trocarAba(
+    aba:string
+  ) {
+
+    this.abaAtual = aba;
 
   }
 }

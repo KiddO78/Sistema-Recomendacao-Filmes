@@ -1,3 +1,5 @@
+import { Actor } from './actor';
+
 export interface Movie {
 
   id: number;
@@ -19,5 +21,7 @@ export interface Movie {
   trailer: string;
 
   thumbnail: string;
+
+  atores: Actor[];
 
 }
