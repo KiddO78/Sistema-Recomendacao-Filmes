@@ -18,6 +18,7 @@ import { WatchlistService } from '../../services/watchlist.service';
 import { UserService } from '../../services/user.service';
 import { ReviewService } from '../../services/review.service';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie-details',
@@ -39,6 +40,8 @@ export class MovieDetails {
   editandoIndex = -1;
   resposta = '';
   limiteCaracteres = 500;
+  mostrarTrailer = false;
+  trailerSeguro?: SafeResourceUrl;
 
   constructor(
 
@@ -56,7 +59,9 @@ export class MovieDetails {
 
     private userService: UserService,
 
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+
+    private sanitizer: DomSanitizer
 
   ) {
 
@@ -72,6 +77,19 @@ export class MovieDetails {
     this.filme =
       this.movieService
         .getMovieById(id);
+
+    if(this.filme) {
+
+      this.trailerSeguro =
+
+        this.sanitizer
+          .bypassSecurityTrustResourceUrl(
+
+            this.filme.trailer
+
+          );
+
+    }
 
     if(
       this.filme &&
@@ -469,6 +487,18 @@ export class MovieDetails {
       );
 
     }
+
+  }
+
+  abrirTrailer() {
+
+    this.mostrarTrailer = true;
+
+  }
+
+  fecharTrailer() {
+
+    this.mostrarTrailer = false;
 
   }
 }

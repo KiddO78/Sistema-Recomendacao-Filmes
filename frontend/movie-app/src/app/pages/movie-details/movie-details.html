@@ -24,252 +24,256 @@
     class="hero"
     [style.background-image]="'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' + filme.banner + ')'">
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-      <img
-        [src]="filme.poster"
-        class="poster">
+        <img
+            [src]="filme.poster"
+            class="poster">
 
-      <div class="info">
+        <div class="info">
 
-            <h1>
+                <h1>
 
-            {{ filme.titulo }}
+                {{ filme.titulo }}
 
-            </h1>
+                </h1>
 
-            <div class="meta">
+                <div class="meta">
 
-            ⭐ {{ filme.nota }}
-            •
-            {{ filme.genero }}
-            •
-            {{ filme.ano }}
-
-            </div>
-
-            <p>
-
-            {{ filme.descricao }}
-
-            </p>
-
-            <div class="rating-box">
-
-                <h3>
-
-                    Sua avaliação
-
-                </h3>
-
-                <div class="stars">
-
-                    <span
-                    *ngFor="let estrela of estrelas"
-                    (click)="avaliar(estrela)"
-                    [class.active]="
-                        estrela <= notaUsuario
-                    ">
-
-                    ★
-
-                    </span>
+                ⭐ {{ filme.nota }}
+                •
+                {{ filme.genero }}
+                •
+                {{ filme.ano }}
 
                 </div>
 
-            </div>
+                <p>
 
-            <div class="buttons">
+                {{ filme.descricao }}
 
-            <button class="btn-watch">
+                </p>
 
-                ▶ Assistir Trailer
+                <div class="rating-box">
 
-            </button>
+                    <h3>
 
-            <button
-                class="btn-favorite"
-                (click)="toggleFavorito()">
+                        Sua avaliação
 
-                    <span
-                        [ngClass]="{ 'favoritado': favorito }"
-                        class="heart">
+                    </h3>
 
-                        ❤
+                    <div class="stars">
 
-                    </span>
+                        <span
+                        *ngFor="let estrela of estrelas"
+                        (click)="avaliar(estrela)"
+                        [class.active]="
+                            estrela <= notaUsuario
+                        ">
 
-                    {{ favorito ? 'Favoritado' : 'Favoritar' }}
+                        ★
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                <button 
+                    class="btn-watch"
+                    (click)="abrirTrailer()">
+
+                    ▶ Assistir Trailer
 
                 </button>
 
                 <button
-                    class="btn-watchlist"
-                    (click)="toggleWatchlist()">
+                    class="btn-favorite"
+                    (click)="toggleFavorito()">
 
-                    {{ naWatchlist
-                        ? '✔ Na Watchlist'
-                        : '+ Watchlist' }}
+                        <span
+                            [ngClass]="{ 'favoritado': favorito }"
+                            class="heart">
 
-                </button>
+                            ❤
 
-            </div>
+                        </span>
 
-            <div class="reviews-section">
+                        {{ favorito ? 'Favoritado' : 'Favoritar' }}
 
-                <h2>
-
-                    Reviews
-
-                </h2>
-
-                <!-- FORM -->
-
-                <div class="review-form">
-
-                    <textarea
-
-                        [(ngModel)]="comentario"
-
-                        maxlength="500"
-
-                        placeholder="Escreva sua review..."
-
-                    ></textarea>
-
-                    <p class="char-counter">
-
-                        {{ comentario.length }}/500
-
-                    </p>
+                    </button>
 
                     <button
-                        (click)="adicionarComentario()">
+                        class="btn-watchlist"
+                        (click)="toggleWatchlist()">
 
-                        Publicar
+                        {{ naWatchlist
+                            ? '✔ Na Watchlist'
+                            : '+ Watchlist' }}
 
                     </button>
 
                 </div>
 
-                <!-- REVIEWS -->
+                <div class="reviews-section">
 
-                <div
-                    *ngFor="
-                        let review of reviews;
-                        let i = index"
-                    class="review-card">
+                    <h2>
 
-                    <h3>
+                        Reviews
 
-                    👤 {{ review.nome }}
+                    </h2>
 
-                    </h3>
+                    <!-- FORM -->
 
-                    <p class="review-stars">
+                    <div class="review-form">
 
-                    {{ '⭐'.repeat(review.nota) }}
+                        <textarea
 
-                    </p>
+                            [(ngModel)]="comentario"
 
-                    <p>
+                            maxlength="500"
 
-                    {{ review.comentario }}
+                            placeholder="Escreva sua review..."
 
-                    </p>
+                        ></textarea>
 
-                    <p
-                        *ngIf="review.editado"
-                        class="edited-tag">
+                        <p class="char-counter">
 
-                        Editado
+                            {{ comentario.length }}/500
 
-                    </p>
+                        </p>
 
-                    <div class="reply-section">
+                        <button
+                            (click)="adicionarComentario()">
 
-                        <div
-                            *ngFor="
-                            let resposta
-                            of review.respostas
-                            "
-                            class="reply-card">
+                            Publicar
 
-                            <strong>
+                        </button>
 
-                            👤 {{ resposta.nome }}
+                    </div>
 
-                            </strong>
+                    <!-- REVIEWS -->
 
-                            <p>
+                    <div
+                        *ngFor="
+                            let review of reviews;
+                            let i = index"
+                        class="review-card">
 
-                            {{ resposta.texto }}
+                        <h3>
 
-                            </p>
+                        👤 {{ review.nome }}
+
+                        </h3>
+
+                        <p class="review-stars">
+
+                        {{ '⭐'.repeat(review.nota) }}
+
+                        </p>
+
+                        <p>
+
+                        {{ review.comentario }}
+
+                        </p>
+
+                        <p
+                            *ngIf="review.editado"
+                            class="edited-tag">
+
+                            Editado
+
+                        </p>
+
+                        <div class="reply-section">
+
+                            <div
+                                *ngFor="
+                                let resposta
+                                of review.respostas
+                                "
+                                class="reply-card">
+
+                                <strong>
+
+                                👤 {{ resposta.nome }}
+
+                                </strong>
+
+                                <p>
+
+                                {{ resposta.texto }}
+
+                                </p>
+
+                            </div>
+
+                            <div class="reply-form">
+
+                                <input
+
+                                [(ngModel)]="resposta"
+
+                                placeholder="Responder..."
+
+                                >
+
+                                <button
+                                (click)="
+                                    responderReview(i)
+                                ">
+
+                                Responder
+
+                                </button>
+
+                            </div>
 
                         </div>
 
-                        <div class="reply-form">
-
-                            <input
-
-                            [(ngModel)]="resposta"
-
-                            placeholder="Responder..."
-
-                            >
+                        <div class="review-actions">
 
                             <button
-                            (click)="
-                                responderReview(i)
-                            ">
+                                (click)="editarReview(i)">
 
-                            Responder
+                                ✏ Editar
+
+                            </button>
+
+                            <button
+                                (click)="eliminarReview(i)">
+
+                                🗑 Eliminar
 
                             </button>
 
                         </div>
 
-                    </div>
+                        <small>
 
-                    <div class="review-actions">
+                        {{ review.data }}
 
-                        <button
-                            (click)="editarReview(i)">
+                        </small>
 
-                            ✏ Editar
+                        <div class="review-likes">
 
-                        </button>
+                            <button
+                                (click)="darLike(i)">
 
-                        <button
-                            (click)="eliminarReview(i)">
+                                👍
 
-                            🗑 Eliminar
+                            </button>
 
-                        </button>
+                            <span>
 
-                    </div>
+                                {{ review.likes }}
 
-                    <small>
+                            </span>
 
-                    {{ review.data }}
-
-                    </small>
-
-                    <div class="review-likes">
-
-                        <button
-                            (click)="darLike(i)">
-
-                            👍
-
-                        </button>
-
-                        <span>
-
-                            {{ review.likes }}
-
-                        </span>
+                        </div>
 
                     </div>
 
@@ -279,8 +283,33 @@
 
         </div>
 
-    </div>
+    </section>
 
-  </section>
+</div>
+
+<div
+  *ngIf="mostrarTrailer"
+  class="trailer-modal">
+
+  <div class="trailer-content">
+
+    <button
+      class="close-btn"
+      (click)="fecharTrailer()">
+
+      ✖
+
+    </button>
+
+    <iframe
+
+      [src]="trailerSeguro"
+
+      allow="autoplay"
+      allowfullscreen>
+
+    </iframe>
+
+  </div>
 
 </div>
