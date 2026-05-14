@@ -14,6 +14,7 @@ import { Movie } from '../../models/movie';
 import { Location } from '@angular/common';
 import { FavoriteService } from '../../services/favorite.service';
 import { RatingService } from '../../services/rating.service';
+import { WatchlistService } from '../../services/watchlist.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -27,6 +28,7 @@ export class MovieDetails {
   favorito = false;
   notaUsuario = 0;
   estrelas = [1, 2, 3, 4, 5];
+  naWatchlist = false;
 
   constructor(
 
@@ -38,7 +40,9 @@ export class MovieDetails {
 
     private favoriteService: FavoriteService,
 
-    private ratingService: RatingService
+    private ratingService: RatingService,
+
+    private watchlistService: WatchlistService
 
   ) {
 
@@ -54,6 +58,8 @@ export class MovieDetails {
         this.favoriteService.isFavorito(this.filme.id);
       this.notaUsuario =
         this.ratingService.getNota(this.filme.id);
+      this.naWatchlist =
+        this.watchlistService.isWatchlist(this.filme.id);
     }
   }
 
@@ -98,6 +104,22 @@ export class MovieDetails {
           this.filme.id,
           this.notaUsuario
         );
+
+    }
+
+  }
+
+  toggleWatchlist() {
+
+    if(this.filme) {
+
+      this.watchlistService
+        .toggleWatchlist(
+          this.filme
+        );
+
+      this.naWatchlist =
+        !this.naWatchlist;
 
     }
 

@@ -217,3 +217,25 @@
 
   color: #f5c518;
 }
+
+.btn-watchlist {
+
+  background-color: transparent;
+
+  border: 1px solid #f5c518;
+
+  color: #f5c518;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+
+  transition: 0.3s;
+}
+
+.btn-watchlist:hover {
+
+  background-color: #f5c518;
+
+  color: black;
+}

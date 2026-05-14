@@ -8,6 +8,7 @@ import { Movies } from './pages/movies/movies';
 import { MovieDetails } from './pages/movie-details/movie-details';
 import { Favorites } from './pages/favorites/favorites';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { Watchlist } from './pages/watchlist/watchlist';
 
 export const routes: Routes = [
 
@@ -54,6 +55,11 @@ export const routes: Routes = [
   {
     path: 'movie/:id',
     component: MovieDetails
+  },
+
+  {
+    path: 'watchlist',
+    component: Watchlist
   }
 
 ];
