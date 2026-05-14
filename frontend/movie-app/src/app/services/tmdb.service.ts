@@ -44,4 +44,100 @@ export class TmdbService {
 
   }
 
+  getMovieDetails(
+    id:number
+    ) {
+
+    return this.http.get(
+
+        `${this.apiUrl}/movie/${id}`,
+
+        {
+
+        headers:
+            new HttpHeaders({
+
+            Authorization:
+                'Bearer ' + this.token
+
+            })
+
+        }
+
+    );
+
+}
+
+getMovieCredits(
+  id:number
+) {
+
+  return this.http.get(
+
+    `${this.apiUrl}/movie/${id}/credits`,
+
+    {
+
+      headers:
+        new HttpHeaders({
+
+          Authorization:
+            'Bearer ' + this.token
+
+        })
+
+    }
+
+  );
+
+}
+
+getRecommendations(
+  id:number
+) {
+
+  return this.http.get(
+
+    `${this.apiUrl}/movie/${id}/recommendations`,
+
+    {
+
+      headers:
+        new HttpHeaders({
+
+          Authorization:
+            'Bearer ' + this.token
+
+        })
+
+    }
+
+  );
+
+}
+
+getMovieVideos(
+  id:number
+) {
+
+  return this.http.get(
+
+    `${this.apiUrl}/movie/${id}/videos`,
+
+    {
+
+      headers:
+        new HttpHeaders({
+
+          Authorization:
+            'Bearer ' + this.token
+
+        })
+
+    }
+
+  );
+
+}
+
 }

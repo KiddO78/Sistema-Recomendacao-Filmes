@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { 
+  Component,
+  OnInit } from '@angular/core';
 
 import { NgFor } from '@angular/common';
-
-import { MovieService } from '../../services/movie.service';
-
-import { Movie } from '../../models/movie';
 
 import { RouterLink } from '@angular/router';
 
@@ -16,64 +14,36 @@ import { TmdbService } from '../../services/tmdb.service';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
 
-  filmes: Movie[] = [];
-  filmeAtual!: Movie;
-  indiceAtual = 0;
+  filmeAtual:any = null;
   trendingMovies:any[] = [];
   bannerAtual = 0;
   banners:any[] = [];
+  intervaloBanner:any;
 
   constructor(
-    private movieService: MovieService,
     private tmdbService: TmdbService
-  ) {
-
-    this.filmes =
-      this.movieService.getMovies();
-
-    this.filmeAtual =
-      this.filmes[0];
-
-    setInterval(() => {
-
-      this.proximoBanner();
-  
-    }, 5000);
-
-    this.trendingMovies =
-      this.movieService
-        .getTrendingMovies();
-
-    this.banners =
-      this.movieService
-        .getMovies();    
-
-  }
+  ) {}
 
   proximoBanner() {
 
-    this.indiceAtual++;
+    this.bannerAtual++;
 
     if(
-      this.indiceAtual >=
-      this.filmes.length
+      this.bannerAtual >=
+      this.trendingMovies.length
     ) {
 
-      this.indiceAtual = 0;
+      this.bannerAtual = 0;
 
     }
 
     this.filmeAtual =
-      this.filmes[this.indiceAtual];
 
-  }
-
-  getTrendingMovies() {
-
-    return this.filmes
-      .slice(0, 8);
+      this.trendingMovies[
+        this.bannerAtual
+      ];
 
   }
 
@@ -85,24 +55,51 @@ export class Home {
       index;
 
     this.filmeAtual =
-      this.banners[index];
+      this.trendingMovies[index];
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
+    this.carregarTrending();
+
+  }
+
+  carregarTrending() {
 
     this.tmdbService
       .getTrendingMovies()
 
-      .subscribe(
+      .subscribe({
 
-        (res:any) => {
+        next: (res:any) => {
 
-          console.log(res);
+          this.trendingMovies =
+            res.results;
 
-        }
+          this.banners =
+            res.results;
 
-      );
+          if(
+            this.trendingMovies.length > 0
+          ) {
+
+            this.filmeAtual =
+              this.trendingMovies[0];
+
+          }
+
+          this.intervaloBanner =
+
+            setInterval(() => {
+
+              this.proximoBanner();
+
+            }, 5000);
+
+        },
+
+      });
 
   }
 }

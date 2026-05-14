@@ -1,4 +1,5 @@
-<div class="home-page">
+<div 
+    class="home-page">
 
   <!-- HERO -->
 
@@ -13,7 +14,8 @@
         rgba(0,0,0,0.5)
       ),
       url(' +
-      filmeAtual.banner +
+      'https://image.tmdb.org/t/p/original' +
+        filmeAtual?.backdrop_path +
       ')'
     ">
 
@@ -25,7 +27,10 @@
 
         class="hero-poster"
 
-        [src]="filmeAtual.poster">
+        [src]="
+          'https://image.tmdb.org/t/p/w500' +
+          filmeAtual?.poster_path
+        ">
 
       <!-- INFO -->
 
@@ -33,13 +38,13 @@
 
         <h1>
 
-          {{ filmeAtual.titulo }}
+          {{ filmeAtual?.title }}
 
         </h1>
 
         <p>
 
-          {{ filmeAtual.descricao }}
+          {{ filmeAtual?.overview }}
 
         </p>
 
@@ -69,11 +74,14 @@
         <img
 
           *ngFor="
-            let filme of banners;
+            let filme of trendingMovies;
             let i = index
           "
 
-          [src]="filme.poster"
+          [src]="
+            'https://image.tmdb.org/t/p/w500' +
+            filme.poster_path
+          "
 
           [class.active]="
             i === bannerAtual
@@ -116,19 +124,24 @@
         ]">
 
         <img
-          [src]="filme.poster">
+
+          [src]="
+            'https://image.tmdb.org/t/p/w500' +
+            filme.poster_path
+          ">
 
         <div class="trending-info">
 
           <h3>
 
-            {{ filme.titulo }}
+            {{ filme.title }}
 
           </h3>
 
           <p>
 
-            ⭐ {{ filme.nota }}
+            ⭐
+            {{ filme.vote_average.toFixed(1) }}
 
           </p>
 
@@ -156,7 +169,7 @@
 
         *ngFor="
           let filme
-          of filmes
+          of trendingMovies
         "
 
         class="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -172,31 +185,32 @@
 
           <img
 
-            [src]="filme.poster"
+            [src]="
+              'https://image.tmdb.org/t/p/w500' +
+              filme.poster_path
+            "
 
-            [alt]="filme.titulo">
+            [alt]="filme.title">
 
           <div class="movie-info">
 
             <h3>
 
-              {{ filme.titulo }}
+              {{ filme.title }}
 
             </h3>
 
             <p>
 
-              {{ filme.genero }}
-
-              •
-
-              {{ filme.ano }}
+              📅
+              {{ filme.release_date }}
 
             </p>
 
             <div class="nota">
 
-              ⭐ {{ filme.nota }}
+              ⭐
+              {{ filme.vote_average.toFixed(1) }}
 
             </div>
 
