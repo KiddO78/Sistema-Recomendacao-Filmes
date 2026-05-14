@@ -3,45 +3,138 @@
   <!-- HERO -->
 
   <section
-    class="hero"
+
+    class="hero-section"
+
     [style.background-image]="
-        'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' +
-        filmeAtual.banner +
-        ')'
+      'linear-gradient(
+        to right,
+        rgba(0,0,0,0.95),
+        rgba(0,0,0,0.5)
+      ),
+      url(' +
+      filmeAtual.banner +
+      ')'
     ">
 
-    <div class="overlay">
+    <div class="hero-content">
 
-      <div class="hero-content">
+      <!-- POSTER -->
 
-            <h1>
+      <img
 
-                {{ filmeAtual.titulo }}
+        class="hero-poster"
 
-            </h1>
+        [src]="filmeAtual.poster">
 
-            <p>
+      <!-- INFO -->
 
-                {{ filmeAtual.descricao }}
+      <div class="hero-info">
 
-            </p>
+        <h1>
 
-            <div class="hero-buttons">
+          {{ filmeAtual.titulo }}
 
-                <button
-                    class="btn-explore"
-                    [routerLink]="[
-                        '/movie',
-                        filmeAtual.id
-                    ]">
+        </h1>
 
-                    ▶ Explorar
+        <p>
 
-                </button>
+          {{ filmeAtual.descricao }}
 
-            </div>
+        </p>
+
+        <div class="hero-buttons">
+
+          <button
+
+            class="btn-explorar"
+
+            [routerLink]="[
+              '/movie',
+              filmeAtual.id
+            ]">
+
+            ▶ Explorar
+
+          </button>
 
         </div>
+
+      </div>
+
+      <!-- THUMBNAILS -->
+
+      <div class="hero-thumbs">
+
+        <img
+
+          *ngFor="
+            let filme of banners;
+            let i = index
+          "
+
+          [src]="filme.poster"
+
+          [class.active]="
+            i === bannerAtual
+          "
+
+          (click)="
+            selecionarBanner(i)
+          ">
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TRENDING -->
+
+  <section class="trending-section">
+
+    <h2>
+
+      🔥 Trending Now
+
+    </h2>
+
+    <div class="trending-carousel">
+
+      <div
+
+        *ngFor="
+          let filme
+          of trendingMovies
+        "
+
+        class="trending-card"
+
+        [routerLink]="[
+          '/movie',
+          filme.id
+        ]">
+
+        <img
+          [src]="filme.poster">
+
+        <div class="trending-info">
+
+          <h3>
+
+            {{ filme.titulo }}
+
+          </h3>
+
+          <p>
+
+            ⭐ {{ filme.nota }}
+
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -60,14 +153,27 @@
     <div class="row">
 
       <div
-        *ngFor="let filme of filmes"
+
+        *ngFor="
+          let filme
+          of filmes
+        "
+
         class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-        <div class="movie-card"
-          [routerLink]="['/movie', filme.id]">
+        <div
+
+          class="movie-card"
+
+          [routerLink]="[
+            '/movie',
+            filme.id
+          ]">
 
           <img
+
             [src]="filme.poster"
+
             [alt]="filme.titulo">
 
           <div class="movie-info">
@@ -81,7 +187,9 @@
             <p>
 
               {{ filme.genero }}
+
               •
+
               {{ filme.ano }}
 
             </p>

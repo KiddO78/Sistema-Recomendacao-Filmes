@@ -1,22 +1,19 @@
 .home-page {
 
-  background-color: #0b0b0b;
+  background-color: #050505;
 
   min-height: 100vh;
 
   color: white;
+
+  overflow-x: hidden;
 }
 
-.hero {
+/* HERO */
 
-  height: 70vh;
+.hero-section {
 
-  background:
-    linear-gradient(
-      rgba(0,0,0,0.7),
-      rgba(0,0,0,0.9)
-    ),
-    url('https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg');
+  min-height: 100vh;
 
   background-size: cover;
 
@@ -25,39 +22,237 @@
   display: flex;
 
   align-items: center;
-}
 
-.overlay {
+  padding: 80px;
 
-  width: 100%;
+  transition: 0.5s;
 }
 
 .hero-content {
 
-  padding-left: 8%;
+  display: flex;
+
+  align-items: center;
+
+  gap: 60px;
+
+  width: 100%;
 }
 
-.hero-content h1 {
+/* POSTER */
 
-  font-size: 4rem;
+.hero-poster {
+
+  width: 280px;
+
+  border-radius: 24px;
+
+  object-fit: cover;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.7);
+}
+
+/* INFO */
+
+.hero-info {
+
+  max-width: 700px;
+}
+
+.hero-info h1 {
+
+  font-size: 5rem;
+
+  font-weight: 800;
+
+  margin-bottom: 25px;
+
+  line-height: 1;
+}
+
+.hero-info p {
+
+  font-size: 1.25rem;
+
+  line-height: 1.8;
+
+  color: #d1d1d1;
+
+  margin-bottom: 35px;
+}
+
+/* BUTTONS */
+
+.hero-buttons {
+
+  display: flex;
+
+  gap: 20px;
+}
+
+.btn-explorar {
+
+  background-color: #f5c518;
+
+  border: none;
+
+  padding: 18px 40px;
+
+  border-radius: 14px;
+
+  font-size: 1.1rem;
 
   font-weight: bold;
 
-  margin-bottom: 20px;
+  transition: 0.3s;
 }
 
-.hero-content p {
+.btn-explorar:hover {
 
-  font-size: 1.3rem;
+  transform: scale(1.05);
 
-  color: #ccc;
+  background-color: #ddb100;
 }
+
+/* THUMBS */
+
+.hero-thumbs {
+
+  margin-left: auto;
+
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+}
+
+.hero-thumbs img {
+
+  width: 85px;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  opacity: 0.5;
+
+  transition: 0.3s;
+
+  border: 2px solid transparent;
+}
+
+.hero-thumbs img:hover {
+
+  transform: scale(1.08);
+
+  opacity: 1;
+}
+
+.hero-thumbs img.active {
+
+  opacity: 1;
+
+  border: 3px solid #f5c518;
+
+  transform: scale(1.08);
+}
+
+/* TRENDING */
+
+.trending-section {
+
+  padding: 70px 50px;
+}
+
+.trending-section h2 {
+
+  font-size: 2.2rem;
+
+  margin-bottom: 35px;
+
+  color: white;
+}
+
+.trending-carousel {
+
+  display: flex;
+
+  gap: 25px;
+
+  overflow-x: auto;
+
+  scroll-behavior: smooth;
+
+  padding-bottom: 20px;
+}
+
+.trending-carousel::-webkit-scrollbar {
+
+  height: 8px;
+}
+
+.trending-carousel::-webkit-scrollbar-thumb {
+
+  background-color: #f5c518;
+
+  border-radius: 20px;
+}
+
+.trending-card {
+
+  min-width: 230px;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+}
+
+.trending-card:hover {
+
+  transform: scale(1.08);
+}
+
+.trending-card img {
+
+  width: 100%;
+
+  height: 340px;
+
+  object-fit: cover;
+
+  border-radius: 18px;
+}
+
+.trending-info {
+
+  margin-top: 15px;
+}
+
+.trending-info h3 {
+
+  font-size: 1.2rem;
+}
+
+.trending-info p {
+
+  color: #f5c518;
+
+  margin-top: 8px;
+}
+
+/* FILMES */
 
 .section-title {
 
-  font-size: 2rem;
+  font-size: 2.2rem;
 
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 
   color: #f5c518;
 }
@@ -81,7 +276,8 @@
 
   transform: translateY(-10px);
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.5);
 }
 
 .movie-card img {
@@ -119,51 +315,63 @@
   font-weight: bold;
 }
 
+/* RESPONSIVO */
+
+@media(max-width:992px) {
+
+  .hero-content {
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .hero-thumbs {
+
+    margin-left: 0;
+
+    margin-top: 30px;
+  }
+
+  .hero-info h1 {
+
+    font-size: 3.5rem;
+  }
+
+}
+
 @media(max-width:768px) {
 
-  .hero-content h1 {
+  .hero-section {
 
-    font-size: 2.5rem;
+    padding: 40px 20px;
   }
 
-  .hero {
+  .hero-poster {
 
-    height: 50vh;
+    width: 220px;
   }
 
-}
+  .hero-info h1 {
 
-.hero {
+    font-size: 2.7rem;
+  }
 
-  transition:
-    background-image 1s ease-in-out;
-}
+  .hero-info p {
 
-.hero-buttons {
+    font-size: 1rem;
+  }
 
-  margin-top: 30px;
-}
+  .hero-thumbs img {
 
-.btn-explore {
+    width: 65px;
 
-  background-color: #f5c518;
+    height: 95px;
+  }
 
-  border: none;
+  .trending-section {
 
-  padding: 15px 30px;
+    padding: 50px 20px;
+  }
 
-  border-radius: 12px;
-
-  font-weight: bold;
-
-  font-size: 1rem;
-
-  transition: 0.3s;
-}
-
-.btn-explore:hover {
-
-  transform: scale(1.05);
-
-  background-color: #ddb100;
 }

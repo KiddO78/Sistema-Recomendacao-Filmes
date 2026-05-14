@@ -19,6 +19,9 @@ export class Home {
   filmes: Movie[] = [];
   filmeAtual!: Movie;
   indiceAtual = 0;
+  trendingMovies:any[] = [];
+  bannerAtual = 0;
+  banners:any[] = [];
 
   constructor(
     private movieService: MovieService
@@ -35,6 +38,14 @@ export class Home {
       this.proximoBanner();
   
     }, 5000);
+
+    this.trendingMovies =
+      this.movieService
+        .getTrendingMovies();
+
+    this.banners =
+      this.movieService
+        .getMovies();    
 
   }
 
@@ -53,6 +64,25 @@ export class Home {
 
     this.filmeAtual =
       this.filmes[this.indiceAtual];
+
+  }
+
+  getTrendingMovies() {
+
+    return this.filmes
+      .slice(0, 8);
+
+  }
+
+  selecionarBanner(
+    index:number
+  ) {
+
+    this.bannerAtual =
+      index;
+
+    this.filmeAtual =
+      this.banners[index];
 
   }
 }

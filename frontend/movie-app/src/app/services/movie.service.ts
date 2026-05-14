@@ -107,6 +107,13 @@ export class MovieService {
 
     }
 
+    getTrendingMovies() {
+
+        return this.filmes
+            .slice(0, 8);
+
+    }
+
     searchMovies(termo:string) {
 
         return this.filmes.filter(filme =>
