@@ -1,35 +1,49 @@
 import { Component } from '@angular/core';
-import { 
+
+import {
   NgIf,
   NgClass,
   NgFor,
- } from '@angular/common';
+} from '@angular/common';
 
 import {
   ActivatedRoute,
   RouterLink
 } from '@angular/router';
 
-import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie';
+
 import { Location } from '@angular/common';
+
 import { FavoriteService } from '../../services/favorite.service';
+
 import { RatingService } from '../../services/rating.service';
+
 import { WatchlistService } from '../../services/watchlist.service';
+
 import { UserService } from '../../services/user.service';
+
 import { ReviewService } from '../../services/review.service';
+
 import { FormsModule } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { TmdbService } from '../../services/tmdb.service';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [NgIf, NgClass, NgFor, FormsModule, RouterLink],
+  imports: [
+    NgIf,
+    NgClass,
+    NgFor,
+    FormsModule,
+    RouterLink
+  ],
   templateUrl: './movie-details.html',
   styleUrl: './movie-details.css'
 })
 export class MovieDetails {
 
-  filme?: Movie;
+  filme: any;
   favorito = false;
   notaUsuario = 0;
   estrelas = [1, 2, 3, 4, 5];
@@ -42,15 +56,12 @@ export class MovieDetails {
   resposta = '';
   limiteCaracteres = 500;
   mostrarTrailer = false;
-  trailerSeguro?: SafeResourceUrl;
   abaAtual = 'detalhes';
   recomendados:any[] = [];
 
   constructor(
 
     private route: ActivatedRoute,
-
-    private movieService: MovieService,
 
     private location: Location,
 
@@ -64,7 +75,7 @@ export class MovieDetails {
 
     private reviewService: ReviewService,
 
-    private sanitizer: DomSanitizer
+    private tmdbService: TmdbService
 
   ) {
 
@@ -77,69 +88,83 @@ export class MovieDetails {
           .paramMap.get('id')
       );
 
-    this.filme =
-      this.movieService
-        .getMovieById(id);
+    // 🎬 DETALHES DO FILME
 
-    this.recomendados =
+    this.tmdbService
+      .getMovieDetails(id)
 
-      this.movieService
-        .getMovies()
-        .filter(
+      .subscribe({
 
-          filme =>
+        next: (res:any) => {
 
-            filme.id !== id
+          this.filme = res;
 
-        )
-        .slice(0,6);
+          // 🎭 ELENCO
 
-    if(this.filme) {
+          this.tmdbService
+            .getMovieCredits(id)
 
-      this.trailerSeguro =
+            .subscribe({
 
-        this.sanitizer
-          .bypassSecurityTrustResourceUrl(
+              next: (credits:any) => {
 
-            this.filme.trailer
+                this.filme.atores =
+                  credits.cast.slice(0, 10);
 
-          );
+              }
 
-    }
+            });
 
-    if(
-      this.filme &&
-      this.usuarioLogado
-    ) {
+          // ⭐ FAVORITOS / WATCHLIST / RATING
 
-      this.favorito =
-        this.favoriteService
-          .isFavorito(
-            this.filme.id
-          );
+          this.favorito =
+            this.favoriteService
+              .isFavorito(
+                this.filme.id
+              );
 
-      this.naWatchlist =
+          this.naWatchlist =
 
-        this.watchlistService
-          .isWatchlist(
-            this.filme.id
-          );
+            this.watchlistService
+              .isWatchlist(
+                this.filme.id
+              );
 
-      this.notaUsuario =
+          this.notaUsuario =
 
-        this.ratingService
-          .getNota(
-            this.filme.id
-          );
+            this.ratingService
+              .getNota(
+                this.filme.id
+              );
 
-      this.reviews =
+          // 📝 REVIEWS
 
-        this.reviewService
-          .getReviews(
-            this.filme.id
-          );
+          this.reviews =
 
-    }
+            this.reviewService
+              .getReviews(
+                this.filme.id
+              );
+
+        }
+
+      });
+
+    // 🔥 RECOMENDAÇÕES
+
+    this.tmdbService
+      .getRecommendations(id)
+
+      .subscribe({
+
+        next: (res:any) => {
+
+          this.recomendados =
+            res.results.slice(0, 6);
+
+        }
+
+      });
 
   }
 
@@ -291,7 +316,7 @@ export class MovieDetails {
       data:
         new Date()
           .toLocaleString(),
-      
+
       respostas: [],
 
       likes: 0,
@@ -525,4 +550,5 @@ export class MovieDetails {
     this.abaAtual = aba;
 
   }
+
 }
