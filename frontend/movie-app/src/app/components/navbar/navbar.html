@@ -12,17 +12,46 @@
 
   <!-- PESQUISA -->
 
-  <form class="search-box d-flex">
+  <form 
+    class="search-box d-flex"
+    (ngSubmit)="pesquisar()"
+    >
+
+    <div
+    *ngIf="resultados.length > 0"
+    class="search-results">
+
+        <div
+            *ngFor="let filme of resultados"
+            class="search-item"
+            [routerLink]="[
+            '/movie',
+            filme.id
+            ]">
+
+            <img
+            [src]="filme.poster">
+
+            <span>
+
+                {{ filme.titulo }}
+
+            </span>
+
+        </div>
+
+    </div>
 
     <input
       type="text"
       placeholder="Pesquisar filmes..."
       [(ngModel)]="pesquisa"
+      (input)="buscarSugestoes()"
       name="pesquisa"
       class="form-control">
 
     <button
-      type="button"
+      type="submit"
       class="btn-search">
 
       🔍

@@ -2,26 +2,46 @@
 
   <!-- HERO -->
 
-  <section class="hero">
+  <section
+    class="hero"
+    [style.background-image]="
+        'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' +
+        filmeAtual.banner +
+        ')'
+    ">
 
     <div class="overlay">
 
       <div class="hero-content">
 
-        <h1>
+            <h1>
 
-          Descubra Filmes Incríveis
+                {{ filmeAtual.titulo }}
 
-        </h1>
+            </h1>
 
-        <p>
+            <p>
 
-          Explore avaliações,
-          favoritos e recomendações.
+                {{ filmeAtual.descricao }}
 
-        </p>
+            </p>
 
-      </div>
+            <div class="hero-buttons">
+
+                <button
+                    class="btn-explore"
+                    [routerLink]="[
+                        '/movie',
+                        filmeAtual.id
+                    ]">
+
+                    ▶ Explorar
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 

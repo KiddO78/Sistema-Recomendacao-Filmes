@@ -132,3 +132,38 @@
   }
 
 }
+
+.hero {
+
+  transition:
+    background-image 1s ease-in-out;
+}
+
+.hero-buttons {
+
+  margin-top: 30px;
+}
+
+.btn-explore {
+
+  background-color: #f5c518;
+
+  border: none;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+
+  font-size: 1rem;
+
+  transition: 0.3s;
+}
+
+.btn-explore:hover {
+
+  transform: scale(1.05);
+
+  background-color: #ddb100;
+}

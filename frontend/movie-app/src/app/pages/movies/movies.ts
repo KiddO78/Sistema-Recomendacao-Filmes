@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
+import { 
+  NgFor,
+  NgClass } from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -12,6 +14,7 @@ import { Movie } from '../../models/movie';
   selector: 'app-movies',
   imports: [
     NgFor,
+    NgClass,
     RouterLink
   ],
   templateUrl: './movies.html',
@@ -20,6 +23,9 @@ import { Movie } from '../../models/movie';
 export class Movies {
 
   filmes: Movie[] = [];
+  generos:string[] = [];
+
+  generoSelecionado = 'Todos';
 
   constructor(
     private movieService: MovieService
@@ -27,6 +33,35 @@ export class Movies {
 
     this.filmes =
       this.movieService.getMovies();
+
+    this.generos =
+      this.movieService.getGeneros();
+
+  }
+
+  filtrarGenero(
+    genero:string
+  ) {
+
+    this.generoSelecionado =
+      genero;
+
+    if(genero === 'Todos') {
+
+      this.filmes =
+        this.movieService.getMovies();
+
+    } else {
+
+      this.filmes =
+        this.movieService
+          .getMovies()
+          .filter(
+            filme =>
+              filme.genero === genero
+          );
+
+    }
 
   }
 

@@ -107,4 +107,20 @@ export class MovieService {
         );
 
     }
+
+    getGeneros() {
+
+        return [
+
+            'Todos',
+
+            'Ação',
+
+            'Drama',
+
+            'Ficção Científica'
+
+        ];
+
+    }
 }

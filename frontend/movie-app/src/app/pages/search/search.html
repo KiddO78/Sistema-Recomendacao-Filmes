@@ -1,10 +1,11 @@
-<div class="movies-page">
+<div class="search-page">
 
   <div class="container py-5">
 
     <h1 class="title">
 
-      Filmes
+      Resultados para:
+      "{{ termo }}"
 
     </h1>
 
@@ -28,21 +29,6 @@
               {{ filme.titulo }}
 
             </h3>
-
-            <div class="genres">
-
-                <button
-                    *ngFor="let genero of generos"
-                    (click)="filtrarGenero(genero)"
-                    [ngClass]="{
-                    'active': generoSelecionado === genero
-                    }">
-
-                    {{ genero }}
-
-                </button>
-
-            </div>
 
             <p>
 

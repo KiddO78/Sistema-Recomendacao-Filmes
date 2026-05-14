@@ -9,6 +9,7 @@ import { MovieDetails } from './pages/movie-details/movie-details';
 import { Favorites } from './pages/favorites/favorites';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Watchlist } from './pages/watchlist/watchlist';
+import { Search } from './pages/search/search';
 
 export const routes: Routes = [
 
@@ -60,6 +61,11 @@ export const routes: Routes = [
   {
     path: 'watchlist',
     component: Watchlist
+  },
+
+  {
+    path: 'search/:termo',
+    component: Search
   }
 
 ];
