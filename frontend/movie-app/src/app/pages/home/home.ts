@@ -1,8 +1,10 @@
 import { 
   Component,
-  OnInit } from '@angular/core';
+  OnInit,
+  ChangeDetectorRef
+ } from '@angular/core';
 
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -10,7 +12,7 @@ import { TmdbService } from '../../services/tmdb.service';
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, RouterLink],
+  imports: [NgFor, NgIf, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -23,7 +25,8 @@ export class Home implements OnInit {
   intervaloBanner:any;
 
   constructor(
-    private tmdbService: TmdbService
+    private tmdbService: TmdbService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   proximoBanner() {
@@ -44,6 +47,7 @@ export class Home implements OnInit {
       this.trendingMovies[
         this.bannerAtual
       ];
+    this.cdr.detectChanges();
 
   }
 
@@ -75,10 +79,19 @@ export class Home implements OnInit {
         next: (res:any) => {
 
           this.trendingMovies =
-            res.results;
+
+            res.results.filter(
+
+              (filme:any) =>
+
+                filme.poster_path &&
+                filme.backdrop_path &&
+                filme.title
+
+            );
 
           this.banners =
-            res.results;
+            this.trendingMovies;
 
           if(
             this.trendingMovies.length > 0

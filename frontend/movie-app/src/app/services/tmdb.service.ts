@@ -44,9 +44,7 @@ export class TmdbService {
 
   }
 
-  getMovieDetails(
-    id:number
-    ) {
+  getMovieDetails(id:number) {
 
     return this.http.get(
 
@@ -58,7 +56,7 @@ export class TmdbService {
             new HttpHeaders({
 
             Authorization:
-                'Bearer ' + this.token
+                `Bearer ${this.token}`
 
             })
 
@@ -66,7 +64,7 @@ export class TmdbService {
 
     );
 
-}
+    }
 
 getMovieCredits(
   id:number
@@ -81,8 +79,8 @@ getMovieCredits(
       headers:
         new HttpHeaders({
 
-          Authorization:
-            'Bearer ' + this.token
+            Authorization:
+            `Bearer ${this.token}`
 
         })
 
@@ -106,7 +104,7 @@ getRecommendations(
         new HttpHeaders({
 
           Authorization:
-            'Bearer ' + this.token
+            `Bearer ${this.token}`
 
         })
 

@@ -1,5 +1,9 @@
 <div
-  *ngIf="filme"
+  *ngIf="
+  filme &&
+  filme.poster_path &&
+  filme.backdrop_path &&
+  filme.genres"
   class="details-page">
 
     <button
@@ -24,21 +28,27 @@
     class="hero"
     [style.background-image]="
       'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' +
-      filme.banner +
+      'https://image.tmdb.org/t/p/original' +
+      filme.backdrop_path +
       ')'
     ">
 
     <div class="hero-content">
 
       <img
-          [src]="filme.poster"
+
+          [src]="
+            'https://image.tmdb.org/t/p/w500' +
+            filme.poster_path
+          "
+
           class="poster">
 
       <div class="info">
 
         <h1>
 
-          {{ filme.titulo }}
+          {{ filme.title }}
 
         </h1>
 
@@ -96,17 +106,22 @@
 
           <div class="meta">
 
-            ⭐ {{ filme.nota }}
+            ⭐
+            {{ filme.vote_average?.toFixed(1) }}
+
             •
-            {{ filme.genero }}
+
+            {{ filme.genres[0]?.name }}
+
             •
-            {{ filme.ano }}
+
+            {{ filme.release_date?.slice(0,4) }}
 
           </div>
 
           <p>
 
-            {{ filme.descricao }}
+            {{ filme.overview }}
 
           </p>
 
@@ -186,6 +201,7 @@
         <!-- ELENCO -->
 
         <section
+
           *ngIf="
             abaAtual === 'elenco'
           "
@@ -204,23 +220,27 @@
 
               *ngFor="
                 let ator
-                of filme?.atores
+                of filme?.atores || []
               "
 
               class="actor-card">
 
               <img
-                [src]="ator.foto">
+
+                [src]="
+                  'https://image.tmdb.org/t/p/w500' +
+                  ator.profile_path
+                ">
 
               <h3>
 
-                {{ ator.nome }}
+                {{ ator.name }}
 
               </h3>
 
               <p>
 
-                {{ ator.personagem }}
+                {{ ator.character }}
 
               </p>
 
@@ -262,7 +282,7 @@
 
             <p class="char-counter">
 
-              {{ comentario.length }}/500
+              {{ comentario?.length || 0 }}/500
 
             </p>
 
@@ -444,11 +464,15 @@
         ]">
 
         <img
-          [src]="filme.poster">
+
+          [src]="
+            'https://image.tmdb.org/t/p/w500' +
+            filme.poster_path
+          ">
 
         <h3>
 
-          {{ filme.titulo }}
+          {{ filme.title }}
 
         </h3>
 
@@ -457,35 +481,5 @@
     </div>
 
   </section>
-
-</div>
-
-<!-- TRAILER -->
-
-<div
-  *ngIf="mostrarTrailer"
-  class="trailer-modal">
-
-  <div class="trailer-content">
-
-    <button
-      class="close-btn"
-      (click)="fecharTrailer()">
-
-      ✖
-
-    </button>
-
-    <iframe
-
-      [src]="trailerSeguro"
-
-      allow="autoplay"
-
-      allowfullscreen>
-
-    </iframe>
-
-  </div>
 
 </div>

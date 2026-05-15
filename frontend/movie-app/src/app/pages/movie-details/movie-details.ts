@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,
+  OnInit,
+  ChangeDetectorRef
+ } from '@angular/core';
 
 import {
   NgIf,
@@ -75,7 +78,8 @@ export class MovieDetails {
 
     private reviewService: ReviewService,
 
-    private tmdbService: TmdbService
+    private tmdbService: TmdbService,
+    private cdr: ChangeDetectorRef
 
   ) {
 
@@ -97,7 +101,9 @@ export class MovieDetails {
 
         next: (res:any) => {
 
+          console.log(res);
           this.filme = res;
+          this.cdr.detectChanges();
 
           // 🎭 ELENCO
 

@@ -1,5 +1,9 @@
 <div 
-    class="home-page">
+    class="home-page" *ngIf="
+    filmeAtual &&
+    filmeAtual.poster_path &&
+    filmeAtual.backdrop_path
+  ">
 
   <!-- HERO -->
 
@@ -30,6 +34,9 @@
         [src]="
           'https://image.tmdb.org/t/p/w500' +
           filmeAtual?.poster_path
+        "
+        (error)="
+        $any($event.target).style.display='none'
         ">
 
       <!-- INFO -->
@@ -74,7 +81,7 @@
         <img
 
           *ngFor="
-            let filme of trendingMovies;
+            let filme of trendingMovies.slice(0, 12);
             let i = index
           "
 
